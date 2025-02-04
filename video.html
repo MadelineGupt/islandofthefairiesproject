@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebXR Video</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <!-- Sky (Background) -->
+        <a-sky color="#000"></a-sky>
+
+        <!-- VR Video (Fullscreen) -->
+        <a-video id="videoPlayer" position="0 1.5 -2" width="4" height="2.5"></a-video>
+
+        <!-- Back Button -->
+        <a-plane position="0 2 -1" width="0.5" height="0.2" color="gray" onclick="goBack()">
+            <a-text value="Back" align="center" position="0 0 0.1" color="white"></a-text>
+        </a-plane>
+    </a-scene>
+
+    <script>
+        // Extract video source from URL
+        const params = new URLSearchParams(window.location.search);
+        const videoSrc = params.get("video");
+
+        if (videoSrc) {
+            document.getElementById("videoPlayer").setAttribute("src", videoSrc);
+        }
+
+        function goBack() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
