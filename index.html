@@ -14,10 +14,8 @@
 
         <!-- Clickable Areas (Smaller Buttons) -->
         <a-entity position="0 1 -3">
-            <a-plane id="area1" position="-1 0 0" width="0.2" height="0.2" color="red"
-                onclick="goToVideo('video1.mp4')"></a-plane>
-            <a-plane id="area2" position="1 0 0" width="0.2" height="0.2" color="blue"
-                onclick="goToVideo('video2.MOV')"></a-plane>
+            <a-plane id="area1" position="-1 0 0" width="0.2" height="0.2" color="red"></a-plane>
+            <a-plane id="area2" position="1 0 0" width="0.2" height="0.2" color="blue"></a-plane>
         </a-entity>
     </a-scene>
 
@@ -25,6 +23,16 @@
         function goToVideo(videoSrc) {
             window.location.href = "video.html?video=" + encodeURIComponent(videoSrc);
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("area1").addEventListener("click", function () {
+                goToVideo("video1.mp4");
+            });
+
+            document.getElementById("area2").addEventListener("click", function () {
+                goToVideo("video2.MOV");
+            });
+        });
     </script>
 </body>
 </html>
