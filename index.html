@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>WebXR Map</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebXR Map with Ocean Scene</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/a-frame@1.4.0/examples/js/shaders/OceanShader.js"></script>
 </head>
 <body>
     <a-scene>
-        <!-- Sky (Background) -->
-        <a-sky color="#b7cdeb"></a-sky>
+        <!-- Sky Dome with Ocean Scene -->
+        <a-sky src="cloudy_ocean.jpg"></a-sky>
 
-        <!-- Camera with Cursor and Controls -->
+        <!-- Ocean Water Surface -->
+        <a-entity id="ocean" geometry="primitive: plane; width: 100; height: 100"
+                  rotation="-90 0 0"
+                  material="shader: ocean; opacity: 0.8">
+        </a-entity>
+
+        <!-- Camera with Cursor -->
         <a-entity id="camera" camera position="0 1.6 0" look-controls wasd-controls>
             <a-cursor color="black"></a-cursor>
         </a-entity>
@@ -19,8 +28,8 @@
 
         <!-- Clickable Areas -->
         <a-entity position="0 1 -3">
-            <a-circle id="area1" position="0 1 0" radius="0.05" color="red" class="clickable"></a-plane>
-            <a-circle id="area2" position="0 1.5 0" radius="0.05" color="red" class="clickable"></a-plane>
+            <a-circle id="area1" position="0 1 0" radius="0.05" color="red" class="clickable"></a-circle>
+            <a-circle id="area2" position="0 1.5 0" radius="0.05" color="red" class="clickable"></a-circle>
         </a-entity>
     </a-scene>
 
