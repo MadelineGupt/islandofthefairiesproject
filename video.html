@@ -5,17 +5,22 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
 </head>
 <body>
-    <a-scene>
+    <a-scene cursor="rayOrigin: mouse">
         <!-- Sky (Background) -->
         <a-sky color="#000"></a-sky>
 
         <!-- VR Video (Fullscreen) -->
         <a-video id="videoPlayer" position="0 1.5 -6" width="8" height="4"></a-video>
 
-        <!-- Back Button -->
-        <a-plane position="1 1 0" width="0.25" height="0.1" color="gray" onclick="goBack()">
-            <a-text value="Back" align="center" position="0 0 0.1" color="red"></a-text>
+        <!-- Back Button (Moved to a more visible position) -->
+        <a-plane position="0 1 -4" width="0.75" height="0.3" color="gray" class="clickable" id="backButton">
+            <a-text value="Back" align="center" position="0 0 0.1" color="white"></a-text>
         </a-plane>
+
+        <!-- Camera with Cursor -->
+        <a-entity camera look-controls>
+            <a-cursor color="red"></a-cursor>
+        </a-entity>
     </a-scene>
 
     <script>
@@ -27,9 +32,10 @@
             document.getElementById("videoPlayer").setAttribute("src", videoSrc);
         }
 
-        function goBack() {
+        // Back Button Click Function
+        document.getElementById("backButton").addEventListener("click", () => {
             window.location.href = "index.html";
-        }
+        });
     </script>
 </body>
 </html>
