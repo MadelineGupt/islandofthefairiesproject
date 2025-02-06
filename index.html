@@ -1,35 +1,37 @@
 <head>
     <title>WebXR Map</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script src="https://cdn.aframe.io/shaders/latest/aframe-water-shader.min.js"></script>
 </head>
 <body>
     <a-scene>
-        <!-- Animated Water Background -->
-        <a-entity geometry="primitive: plane; width: 10; height: 10" 
+        <!-- Sky (Light Blue) -->
+        <a-sky color="#87CEEB"></a-sky>
+
+        <!-- Water Plane -->
+        <a-entity id="water"
+                  geometry="primitive: plane; width: 20; height: 20"
                   rotation="-90 0 0"
                   position="0 0 -3"
-                  material="shader: water; opacity: 0.8; color: #3b7ebd;"
-                  scale="2 2 1">
+                  material="color: #1a4f7a; shader: standard; opacity: 0.8; repeat: 4 4;">
         </a-entity>
 
         <!-- Camera (Moved Back) -->
-        <a-entity id="camera" camera position="0 1.6 3" look-controls wasd-controls>
+        <a-entity id="camera" camera position="0 1.6 4" look-controls wasd-controls>
             <a-cursor color="black" fuse="false"></a-cursor>
         </a-entity>
 
-        <!-- Floating Map -->
-        <a-image id="map" src="map.png" position="0 1 -3" width="5" height="6"
-                 animation="property: position; from: 0 1 -3; to: 0 1.1 -3; dur: 2000; dir: alternate; loop: true; easing: easeInOutSine">
+        <!-- Floating Map (Raised to Avoid Clipping) -->
+        <a-image id="map" src="map.png" position="0 2 -3" width="5" height="6"
+                 animation="property: position; from: 0 2 -3; to: 0 2.1 -3; dur: 2000; dir: alternate; loop: true; easing: easeInOutSine">
         </a-image>
 
         <!-- Clickable Turtle Icons -->
-        <a-entity position="0 1 -2.3">
-            <a-image id="area1" src="turtle.png" position="-1 0.5 0.1" width=".1" height=".1"
-                     class="clickable" look-at="#camera" material="shader: flat;"></a-image>
-            
-            <a-image id="area2" src="turtle.png" position="1 1 0.1" width="0.1" height="0.1"
-                     class="clickable" look-at="#camera" material="shader: flat;"></a-image>
+        <a-entity position="0 2 -2.8">
+            <a-image id="area1" src="turtle.png" position="-1 0.5 0.1" width="0.3" height="0.3"
+                     class="clickable" look-at="#camera"></a-image>
+
+            <a-image id="area2" src="turtle.png" position="1 1 0.1" width="0.3" height="0.3"
+                     class="clickable" look-at="#camera"></a-image>
         </a-entity>
     </a-scene>
 
