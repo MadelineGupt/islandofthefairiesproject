@@ -12,10 +12,13 @@
         <!-- VR Video (Fullscreen) -->
         <a-video id="videoPlayer" position="0 1.5 -6" width="8" height="4"></a-video>
 
-        <!-- Back Button (Moved to a more visible position) -->
-        <a-plane position="0 0 -8" width="0.75" height="0.3" color="gray" class="clickable" id="backButton">
+        <!-- Back Button (Interactive) -->
+        <a-entity id="backButton" geometry="primitive: plane; width: 0.75; height: 0.3"
+                  material="color: gray; opacity: 1"
+                  position="0 -1 -20"
+                  class="clickable">
             <a-text value="Back" align="center" position="0 0 0.1" color="white"></a-text>
-        </a-plane>
+        </a-entity>
 
         <!-- Camera with Cursor -->
         <a-entity camera look-controls>
@@ -32,8 +35,9 @@
             document.getElementById("videoPlayer").setAttribute("src", videoSrc);
         }
 
-        // Back Button Click Function
+        // Ensure the back button is clickable
         document.getElementById("backButton").addEventListener("click", () => {
+            console.log("Back button clicked!"); // Debugging log
             window.location.href = "index.html";
         });
     </script>
