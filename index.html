@@ -9,19 +9,19 @@
 
         <!-- Camera with Cursor and Controls -->
         <a-entity id="camera" camera position="0 1.6 0" look-controls wasd-controls>
-            <a-cursor color="black"></a-cursor>
+            <a-cursor color="black" fuse="false"></a-cursor>
         </a-entity>
 
         <!-- Map Image -->
         <a-image id="map" src="map.png" position="0 1 -3" width="5" height="6"></a-image>
 
-        <!-- Clickable Areas -->
-        <a-entity position="0 1 -3">
-            <a-plane id="area1" position="-1 0.5 0.1" width="0.2" height="0.2" color="red" class="clickable" 
+        <!-- Clickable Areas (Bigger, Moved Slightly Forward) -->
+        <a-entity position="0 1 -2.9">
+            <a-plane id="area1" position="-1 0.5 0.1" width="0.5" height="0.5" color="red" class="clickable"
                      event-set__enter="_event: mouseenter; color: yellow" 
                      event-set__leave="_event: mouseleave; color: red"></a-plane>
 
-            <a-plane id="area2" position="1 1 0.1" width="0.2" height="0.2" color="red" class="clickable" 
+            <a-plane id="area2" position="1 1 0.1" width="0.5" height="0.5" color="red" class="clickable"
                      event-set__enter="_event: mouseenter; color: yellow" 
                      event-set__leave="_event: mouseleave; color: red"></a-plane>
         </a-entity>
@@ -38,4 +38,9 @@
             });
 
             document.querySelector("#area2").addEventListener("click", function () {
-                goToVideo("
+                goToVideo("video2.mp4");
+            });
+        });
+    </script>
+</body>
+</html>
