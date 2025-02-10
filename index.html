@@ -1,5 +1,5 @@
 <head>
-    <title>WebXR Map</title>
+    <title>WebXR Canoe Experience</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
 </head>
 <body>
@@ -7,7 +7,7 @@
         <!-- Soft Sky Background -->
         <a-sky src="sky.jpg"></a-sky>
 
-         <!-- Realistic Water -->
+        <!-- Realistic Water -->
         <a-entity id="water"
                   geometry="primitive: plane; width: 200; height: 200"
                   rotation="-90 0 0"
@@ -15,12 +15,19 @@
                   material="src: water-texture.jpg; shader: standard; metalness: 0.6; roughness: 0.1; opacity: 0.9;">
         </a-entity>
 
-        <!-- Camera (Moved Back) -->
-        <a-entity id="camera" camera position="0 1.6 4" look-controls wasd-controls>
-            <a-cursor color="black" fuse="false"></a-cursor>
+        <!-- Canoe -->
+        <a-entity id="canoe" position="0 0 4">
+            <a-box width="2.5" height="0.5" depth="5" position="0 0 -2.5" material="color: brown; shader: standard;"></a-box>
         </a-entity>
 
-        <!-- Floating Map with Shading -->
+        <!-- Camera Inside Canoe -->
+        <a-entity id="camera-rig" position="0 0 4">
+            <a-entity id="camera" camera position="0 1.2 0" look-controls wasd-controls="acceleration: 2">
+                <a-cursor color="black"></a-cursor>
+            </a-entity>
+        </a-entity>
+
+        <!-- Floating Map -->
         <a-image id="map" src="map.png" position="0 2 -3" width="5" height="6"
                  material="shader: standard; metalness: 0.1; roughness: 0.8;"
                  animation="property: position; from: 0 2 -3; to: 0 2.1 -3; dur: 2000; dir: alternate; loop: true; easing: easeInOutSine">
@@ -50,6 +57,27 @@
                 goToVideo("video2.mp4");
             });
         });
+
+        AFRAME.registerComponent("paddle-movement", {
+            init: function () {
+                let rig = document.querySelector("#camera-rig");
+
+                window.addEventListener("keydown", function (event) {
+                    if (event.key === "w" || event.key === "s") {
+                        let direction = event.key === "w" ? -1 : 1;
+
+                        rig.setAttribute("animation", {
+                            property: "position.z",
+                            to: rig.object3D.position.z + direction * 2,
+                            dur: 1500,
+                            easing: "easeInOutQuad"
+                        });
+                    }
+                });
+            }
+        });
+
+        document.querySelector("#camera-rig").setAttribute("paddle-movement", "");
     </script>
 </body>
 </html>
