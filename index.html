@@ -15,8 +15,8 @@
                   material="src: water-texture.jpg; shader: standard; metalness: 0.6; roughness: 0.1; opacity: 0.9;">
         </a-entity>
 
-        <!-- Camera Rig (This Moves with Player) -->
-        <a-entity id="camera-rig" position="0 0 4">
+        <!-- Camera Rig (Moves as a Canoe) -->
+        <a-entity id="camera-rig" position="0 0 4" wasd-controls="acceleration: 2">
             <a-entity id="camera" camera position="0 1.2 0" look-controls>
                 <a-cursor color="black"></a-cursor>
             </a-entity>
@@ -58,7 +58,7 @@
             });
         });
 
-        // Canoe movement behavior
+        // Enhanced paddling behavior
         AFRAME.registerComponent("paddle-movement", {
             init: function () {
                 let rig = document.querySelector("#camera-rig");
@@ -67,13 +67,13 @@
                     if (event.key === "w" || event.key === "s") {
                         let direction = event.key === "w" ? -1 : 1;
 
-                        // Move the canoe rig forward or backward smoothly
+                        // Apply smooth movement for forward/backward paddling
                         let currentPosition = rig.getAttribute("position");
                         rig.setAttribute("animation", {
                             property: "position.z",
-                            to: currentPosition.z + direction * 1.5,
-                            dur: 1000,
-                            easing: "easeInOutQuad"
+                            to: currentPosition.z + direction * 2,
+                            dur: 1500,
+                            easing: "easeOutQuad"
                         });
                     }
                 });
