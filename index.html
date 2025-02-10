@@ -21,9 +21,25 @@
                 <a-cursor color="black"></a-cursor>
             </a-entity>
 
-            <!-- Canoe (Attaches to Rig) -->
+            <!-- Canoe (Rounded Shape) -->
             <a-entity id="canoe" position="0 -0.8 0">
-                <a-box width="1.5" height="0.5" depth="4" material="color: #5a3e1b; shader: standard;"></a-box>
+                <!-- Main Canoe Body -->
+                <a-cylinder position="0 0 -1.5" radius="0.7" height="4" 
+                            material="color: #5a3e1b; shader: standard;" rotation="90 0 0"></a-cylinder>
+
+                <!-- Canoe Sides -->
+                <a-cylinder position="0 0.3 -1.5" radius="0.75" height="4" 
+                            material="color: #4a2e1b; shader: standard;" rotation="90 0 0" side="double"></a-cylinder>
+
+                <!-- Canoe Front & Back Caps -->
+                <a-sphere position="0 0 -3.5" radius="0.7" material="color: #5a3e1b;"></a-sphere>
+                <a-sphere position="0 0 0.5" radius="0.7" material="color: #5a3e1b;"></a-sphere>
+            </a-entity>
+
+            <!-- Paddle (Moves When Player Paddles) -->
+            <a-entity id="paddle" position="0 -0.3 0.8">
+                <a-box width="0.15" height="1" depth="0.15" material="color: brown;" position="0 0.5 0"></a-box>
+                <a-box width="0.3" height="0.6" depth="0.1" material="color: brown;" position="0 -0.3 0.1"></a-box>
             </a-entity>
         </a-entity>
 
@@ -58,22 +74,34 @@
             });
         });
 
-        // Enhanced paddling behavior
+        // Canoe Movement + Paddle Animation
         AFRAME.registerComponent("paddle-movement", {
             init: function () {
                 let rig = document.querySelector("#camera-rig");
+                let paddle = document.querySelector("#paddle");
 
                 window.addEventListener("keydown", function (event) {
                     if (event.key === "w" || event.key === "s") {
                         let direction = event.key === "w" ? -1 : 1;
 
-                        // Apply smooth movement for forward/backward paddling
+                        // Move Canoe Forward/Backward Smoothly
                         let currentPosition = rig.getAttribute("position");
                         rig.setAttribute("animation", {
                             property: "position.z",
                             to: currentPosition.z + direction * 2,
                             dur: 1500,
                             easing: "easeOutQuad"
+                        });
+
+                        // Paddle Animation (Swings Forward & Back)
+                        paddle.setAttribute("animation", {
+                            property: "rotation.x",
+                            from: "0",
+                            to: "-45",
+                            dur: 300,
+                            direction: "alternate",
+                            easing: "easeInOutSine",
+                            loop: 2
                         });
                     }
                 });
