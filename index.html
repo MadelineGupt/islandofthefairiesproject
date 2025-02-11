@@ -25,22 +25,27 @@
                 <a-cursor color="black"></a-cursor>
             </a-entity>
 
-            <!-- Canoe (With a Proper Divet) -->
-            <a-entity id="canoe" position="0 -0.8 0">
-                <!-- Canoe Body -->
-                <a-cylinder position="0 0 -1.5" radius="0.7" height="4"
+            <!-- Canoe with a Hollowed-Out Seat -->
+            <a-entity id="canoe" position="0 -0.5 0">
+                <!-- Outer Canoe Body -->
+                <a-cylinder position="0 0 -1.5" radius="0.8" height="4" open-ended="true"
                             material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;"
                             rotation="90 0 0"></a-cylinder>
 
+                <!-- Canoe Hollow Interior (Slightly Smaller Cylinder Inside) -->
+                <a-cylinder position="0 0.1 -1.5" radius="0.7" height="4" open-ended="true"
+                            material="color: black; opacity: 1; side: double"
+                            rotation="90 0 0"></a-cylinder>
+
                 <!-- Canoe Front & Back Caps -->
-                <a-sphere position="0 0 -3.5" radius="0.7"
+                <a-sphere position="0 0 -3.5" radius="0.8"
                           material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;"></a-sphere>
-                <a-sphere position="0 0 0.5" radius="0.7"
+                <a-sphere position="0 0 0.5" radius="0.8"
                           material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;"></a-sphere>
 
-                <!-- Simulated Divet (Invisible Object to Cut Out Seat) -->
-                <a-sphere position="0 0.3 -1.5" radius="0.5"
-                          material="color: #87CEEB; opacity: 0.99; transparent: true;"></a-sphere>
+                <!-- Canoe Rim (Thicker Upper Edge) -->
+                <a-torus position="0 0.25 -1.5" radius="0.8" radius-tubular="0.05"
+                         material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;"></a-torus>
             </a-entity>
         </a-entity>
 
@@ -99,10 +104,10 @@
                             property: "rotation.x",
                             from: "0",
                             to: "-45",
-                            dur: 150,  // Faster paddle movement
+                            dur: 150,
                             direction: "alternate",
                             easing: "easeInOutSine",
-                            loop: 3  // More repetitions to mimic natural paddling
+                            loop: 3
                         });
                     }
                 });
