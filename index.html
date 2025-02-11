@@ -16,11 +16,11 @@
                   geometry="primitive: plane; width: 200; height: 200"
                   rotation="-90 0 0"
                   position="0 0 -3"
-                  material="src: water-texture.jpg; shader: standard; metalness: 0.6; roughness: 0.1; opacity: 0.9;">
+                  material="src: water-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.1; opacity: 0.9;">
         </a-entity>
 
         <!-- Camera Rig (Moves as a Canoe) -->
-        <a-entity id="camera-rig" position="0 0 4" wasd-controls="acceleration: 2">
+        <a-entity id="camera-rig" position="0 0 3" wasd-controls="acceleration: 2">
             <a-entity id="camera" camera position="0 1.2 0" look-controls>
                 <a-cursor color="black"></a-cursor>
             </a-entity>
@@ -39,10 +39,6 @@
                 <a-sphere position="0 0 -3.5" radius="0.7" material="color: #5a3e1b;"></a-sphere>
                 <a-sphere position="0 0 0.5" radius="0.7" material="color: #5a3e1b;"></a-sphere>
 
-                <!-- Canoe Hollow Interior -->
-                <a-cylinder position="0 0.2 -1.5" radius="0.65" height="0.02"
-                            material="color: black; opacity: 1; side: double"
-                            rotation="90 0 0"></a-cylinder>
 
             </a-entity>
 
