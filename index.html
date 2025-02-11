@@ -1,4 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebXR Canoe Experience</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
 </head>
@@ -34,6 +38,10 @@
                 <!-- Canoe Front & Back Caps -->
                 <a-sphere position="0 0 -3.5" radius="0.7" material="color: #5a3e1b;"></a-sphere>
                 <a-sphere position="0 0 0.5" radius="0.7" material="color: #5a3e1b;"></a-sphere>
+
+                <!-- Canoe Hollow Interior -->
+                <a-cylinder position="0 0.15 -1.5" radius="0.65" height="0.01" 
+                            material="color: black; opacity: 0.9;" rotation="90 0 0"></a-cylinder>
             </a-entity>
 
             <!-- Paddle (Moves When Player Paddles) -->
@@ -98,10 +106,10 @@
                             property: "rotation.x",
                             from: "0",
                             to: "-45",
-                            dur: 300,
+                            dur: 150,  // Faster paddle movement
                             direction: "alternate",
                             easing: "easeInOutSine",
-                            loop: 2
+                            loop: 3  // More repetitions to mimic natural paddling
                         });
                     }
                 });
