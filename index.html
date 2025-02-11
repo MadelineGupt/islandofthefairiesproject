@@ -20,21 +20,17 @@
         </a-entity>
 
         <!-- Camera Rig (Moves as a Canoe) -->
-        <a-entity id="camera-rig" position="0 0 0" wasd-controls="acceleration: 2">
+        <a-entity id="camera-rig" position="0 0 2" wasd-controls="acceleration: 2">
             <a-entity id="camera" camera position="0 1.2 0" look-controls>
                 <a-cursor color="black"></a-cursor>
             </a-entity>
 
-            <!-- Canoe (With a Sitting Divet) -->
+            <!-- Canoe (With a Proper Divet) -->
             <a-entity id="canoe" position="0 -0.8 0">
-                <!-- Canoe Body (Open Cylinder) -->
-                <a-cylinder position="0 0 -1.5" radius="0.7" height="4" open-ended="true"
-                            material="src: wood-texture.jpg; shader: standard; side: double; metalness: 0.2; roughness: 0.7;"
+                <!-- Canoe Body -->
+                <a-cylinder position="0 0 -1.5" radius="0.7" height="4"
+                            material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;"
                             rotation="90 0 0"></a-cylinder>
-
-                <!-- Canoe Indentation (Divet for Sitting) -->
-                <a-torus position="0 0.1 -1.5" radius="0.5" radius-tubular="0.2"
-                         material="color: black; opacity: 1; side: double;"></a-torus>
 
                 <!-- Canoe Front & Back Caps -->
                 <a-sphere position="0 0 -3.5" radius="0.7"
@@ -42,10 +38,9 @@
                 <a-sphere position="0 0 0.5" radius="0.7"
                           material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;"></a-sphere>
 
-                <!-- Canoe Rim -->
-                <a-cylinder position="0 0.3 -1.5" radius="0.75" height="4" open-ended="true"
-                            material="src: wood-texture.jpg; shader: standard; side: double; metalness: 0.2; roughness: 0.7;"
-                            rotation="90 0 0"></a-cylinder>
+                <!-- Simulated Divet (Invisible Object to Cut Out Seat) -->
+                <a-sphere position="0 0.3 -1.5" radius="0.5"
+                          material="color: #87CEEB; opacity: 0.99; transparent: true;"></a-sphere>
             </a-entity>
         </a-entity>
 
