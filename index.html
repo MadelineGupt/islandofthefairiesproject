@@ -29,17 +29,15 @@
             <a-entity id="canoe" position="0 -0.8 0">
                 <!-- Main Canoe Body -->
                 <a-cylinder position="0 0 -1.5" radius="0.7" height="4" 
-                            material="color: #5a3e1b; shader: standard;" rotation="90 0 0"></a-cylinder>
+                            material="src: wood-texture.jpg; shader: standard;" rotation="90 0 0"></a-cylinder>
 
                 <!-- Canoe Sides -->
                 <a-cylinder position="0 0.3 -1.5" radius="0.75" height="4" 
-                            material="color: #4a2e1b; shader: standard;" rotation="90 0 0" side="double"></a-cylinder>
+                            material="src: wood-texture.jpg; shader: standard; side: double;" rotation="90 0 0"></a-cylinder>
 
                 <!-- Canoe Front & Back Caps -->
-                <a-sphere position="0 0 -3.5" radius="0.7" material="color: #5a3e1b;"></a-sphere>
-                <a-sphere position="0 0 0.5" radius="0.7" material="color: #5a3e1b;"></a-sphere>
-
-
+                <a-sphere position="0 0 -3.5" radius="0.7" material="src: wood-texture.jpg;"></a-sphere>
+                <a-sphere position="0 0 0.5" radius="0.7" material="src: wood-texture.jpg;"></a-sphere>
             </a-entity>
 
             <!-- Paddle (Moves When Player Paddles) -->
