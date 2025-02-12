@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebXR Canoe Experience</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.min.js"></script>
 </head>
 <body>
     <a-scene>
@@ -19,10 +20,32 @@
                   material="src: water-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.1; opacity: 0.9;">
         </a-entity>
 
-        <!-- Camera Rig (Moves as a Canoe) -->
-        <a-entity id="camera-rig" position="0 -0.5 0" wasd-controls="acceleration: 2">
+        <!-- Camera Rig with VR Movement -->
+        <a-entity id="camera-rig" position="0 -0.5 0" movement-controls="constrainToNavMesh: true">
             <a-entity id="camera" camera position="0 1.2 0" look-controls>
                 <a-cursor color="black"></a-cursor>
+            </a-entity>
+
+            <!-- Left Hand Controller -->
+            <a-entity id="left-hand"
+                      laser-controls="hand: left"
+                      oculus-touch-controls="hand: left"
+                      vive-controls="hand: left"
+                      windows-motion-controls="hand: left"
+                      daydream-controls="hand: left"
+                      gearvr-controls="hand: left"
+                      generic-tracked-controller-controls="hand: left">
+            </a-entity>
+
+            <!-- Right Hand Controller -->
+            <a-entity id="right-hand"
+                      laser-controls="hand: right"
+                      oculus-touch-controls="hand: right"
+                      vive-controls="hand: right"
+                      windows-motion-controls="hand: right"
+                      daydream-controls="hand: right"
+                      gearvr-controls="hand: right"
+                      generic-tracked-controller-controls="hand: right">
             </a-entity>
 
             <!-- Canoe with a Proper Divet -->
@@ -83,7 +106,7 @@
             });
         });
 
-        // Canoe Movement + Paddle Animation
+        // Register Paddle Animation for Non-VR Users
         AFRAME.registerComponent("paddle-movement", {
             init: function () {
                 let rig = document.querySelector("#camera-rig");
