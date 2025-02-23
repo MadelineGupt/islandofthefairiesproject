@@ -9,18 +9,8 @@
 </head>
 <body>
     <a-scene>
-        <!-- Asset Management for 360 Video -->
-        <a-assets>
-            <video id="vr-video" autoplay loop="true" crossorigin="anonymous" webkit-playsinline playsinline>
-                <source src="" type="video/mp4">
-            </video>
-        </a-assets>
-
         <!-- Soft Sky Background -->
         <a-sky src="sky.jpg"></a-sky>
-
-        <!-- 360° Video Sphere (Starts Hidden) -->
-        <a-videosphere id="video-sphere" src="#vr-video" visible="false" rotation="0 180 0"></a-videosphere>
 
         <!-- Realistic Water -->
         <a-entity id="water"
@@ -35,6 +25,52 @@
             <a-entity id="camera" camera position="0 .9 -.5" look-controls>
                 <a-cursor color="black"></a-cursor>
             </a-entity>
+
+            <!-- Left Hand Controller -->
+            <a-entity id="left-hand"
+                      laser-controls="hand: left"
+                      oculus-touch-controls="hand: left"
+                      vive-controls="hand: left"
+                      windows-motion-controls="hand: left"
+                      daydream-controls="hand: left"
+                      gearvr-controls="hand: left"
+                      generic-tracked-controller-controls="hand: left">
+            </a-entity>
+
+            <!-- Right Hand Controller -->
+            <a-entity id="right-hand"
+                      laser-controls="hand: right"
+                      oculus-touch-controls="hand: right"
+                      vive-controls="hand: right"
+                      windows-motion-controls="hand: right"
+                      daydream-controls="hand: right"
+                      gearvr-controls="hand: right"
+                      generic-tracked-controller-controls="hand: right">
+            </a-entity>
+
+            <!-- Canoe with a Proper Divet -->
+            <a-entity id="canoe" position="0 .4 0" scale="0.3 0.3 0.3">
+                <!-- Outer Canoe Body -->
+                <a-cylinder position="0 0 -1.5" radius="0.8" height="4" open-ended="true"
+                            material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7; side: double;"
+                            rotation="90 0 0">
+                </a-cylinder>
+
+                <!-- Canoe Hollow Interior (Cutout for Sitting Area) -->
+                <a-cylinder position="0 0.25 -1.2" radius="0.6" height="3.5" open-ended="true"
+                            material="color: #291810; shader: standard; metalness: 0.1; roughness: 0.9; side: double;"
+                            rotation="90 0 0">
+                </a-cylinder>
+
+                <!-- Canoe Front & Back Caps -->
+                <a-sphere position="0 0 -3.5" radius="0.8"
+                          material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;">
+                </a-sphere>
+
+                <a-sphere position="0 0 0.5" radius="0.8"
+                          material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;">
+                </a-sphere>
+            </a-entity>
         </a-entity>
 
         <!-- Floating Map -->
@@ -43,7 +79,7 @@
                  animation="property: position; from: 0 2 -3; to: 0 2.1 -3; dur: 2000; dir: alternate; loop: true; easing: easeInOutSine">
         </a-image>
 
-        <!-- Clickable Turtle Icons to Play 360 Video -->
+        <!-- Clickable Turtle Icons -->
         <a-entity position="0 2 -2.8">
             <a-image id="area1" src="turtle.png" position="-1 0.5 0.1" width="0.3" height="0.3"
                      class="clickable" look-at="#camera">
@@ -56,24 +92,43 @@
     </a-scene>
 
     <script>
-        function play360Video(videoSrc) {
-            let videoSphere = document.querySelector("#video-sphere");
-            let videoElement = document.querySelector("#vr-video");
-
-            videoElement.setAttribute("src", videoSrc);
-            videoElement.play();
-            videoSphere.setAttribute("visible", "true");
+        function goToVideo(videoSrc) {
+            window.location.href = "video.html?video=" + encodeURIComponent(videoSrc);
         }
 
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("#area1").addEventListener("click", function () {
-                play360Video("https://storage.googleapis.com/islandofthefairies/video1.mov");
+                goToVideo("https://storage.googleapis.com/islandofthefairies/video1.mov");
             });
 
             document.querySelector("#area2").addEventListener("click", function () {
-                play360Video("https://storage.googleapis.com/islandofthefairies/video2.mov");
+                goToVideo("https://storage.googleapis.com/islandofthefairies/video2.mov");
             });
         });
+
+        // Register Paddle Animation for Non-VR Users
+        AFRAME.registerComponent("paddle-movement", {
+            init: function () {
+                let rig = document.querySelector("#camera-rig");
+
+                window.addEventListener("keydown", function (event) {
+                    if (event.key === "w" || event.key === "s") {
+                        let direction = event.key === "w" ? -1 : 1;
+
+                        // Move Canoe Forward/Backward Smoothly
+                        let currentPosition = rig.getAttribute("position");
+                        rig.setAttribute("animation", {
+                            property: "position.z",
+                            to: currentPosition.z + direction * 2,
+                            dur: 1500,
+                            easing: "easeOutQuad"
+                        });
+                    }
+                });
+            }
+        });
+
+        document.querySelector("#camera-rig").setAttribute("paddle-movement", "");
     </script>
 </body>
 </html>
