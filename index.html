@@ -56,7 +56,7 @@
                             rotation="90 0 0">
                 </a-cylinder>
 
-                <!-- Canoe Hollow Interior (Cutout for Sitting Area) -->
+                <!-- Canoe Hollow Interior -->
                 <a-cylinder position="0 0.25 -1.2" radius="0.6" height="3.5" open-ended="true"
                             material="color: #291810; shader: standard; metalness: 0.1; roughness: 0.9; side: double;"
                             rotation="90 0 0">
@@ -79,15 +79,25 @@
                  animation="property: position; from: 0 2 -3; to: 0 2.1 -3; dur: 2000; dir: alternate; loop: true; easing: easeInOutSine">
         </a-image>
 
-        <!-- Clickable Turtle Icons -->
+        <!-- Clickable Turtle Icons (15 total) -->
         <a-entity position="0 2 -2.8">
-            <a-image id="area1" src="turtle.png" position="-1 0.5 0.1" width="0.3" height="0.3"
-                     class="clickable" look-at="#camera">
-            </a-image>
+            <script>
+                let turtlePositions = [
+                    [-1, 0.5, 0.1], [1, 1, 0.1], [0, 1.5, 0.2], [-1.2, 0.8, 0.1], [1.3, 0.7, 0.2],
+                    [-0.5, 1.2, 0.1], [0.7, 0.9, 0.1], [-1.5, 1.1, 0.2], [1.5, 1.3, 0.1], [0, 2, 0.3],
+                    [-0.8, 1.7, 0.1], [0.9, 1.4, 0.2], [-1.3, 1.5, 0.1], [1.1, 1.8, 0.1], [0.2, 2.2, 0.3]
+                ];
 
-            <a-image id="area2" src="turtle.png" position="1 1 0.1" width="0.3" height="0.3"
-                     class="clickable" look-at="#camera">
-            </a-image>
+                for (let i = 0; i < 15; i++) {
+                    document.write(`
+                        <a-image id="area${i + 1}" src="turtle.png"
+                                 position="${turtlePositions[i][0]} ${turtlePositions[i][1]} ${turtlePositions[i][2]}"
+                                 width="0.15" height="0.15"
+                                 class="clickable" look-at="#camera">
+                        </a-image>
+                    `);
+                }
+            </script>
         </a-entity>
     </a-scene>
 
@@ -97,13 +107,11 @@
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            document.querySelector("#area1").addEventListener("click", function () {
-                goToVideo("https://storage.googleapis.com/islandofthefairies/video1.mov");
-            });
-
-            document.querySelector("#area2").addEventListener("click", function () {
-                goToVideo("https://storage.googleapis.com/islandofthefairies/video2.mov");
-            });
+            for (let i = 1; i <= 15; i++) {
+                document.querySelector(`#area${i}`).addEventListener("click", function () {
+                    goToVideo(`https://storage.googleapis.com/islandofthefairies/video${i}.mov`);
+                });
+            }
         });
 
         // Register Paddle Animation for Non-VR Users
