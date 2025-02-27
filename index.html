@@ -9,17 +9,11 @@
         body {
             margin: 0;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: black;
-            color: white;
             font-family: Arial, sans-serif;
         }
         #enterButton {
             position: absolute;
-            z-index: 1000; /* Ensure it's on top */
+            z-index: 1000;
             padding: 15px 30px;
             font-size: 20px;
             border: none;
@@ -27,7 +21,10 @@
             color: black;
             cursor: pointer;
             transition: 0.3s;
-            pointer-events: auto; /* Ensure button can be clicked */
+            pointer-events: auto;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
         #enterButton:hover {
             background: gray;
@@ -37,19 +34,31 @@
             font-size: 50px;
             opacity: 0;
             transition: opacity 2s;
+            color: white;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
         }
         a-scene {
-            pointer-events: none !important; /* Prevent A-Frame from blocking clicks */
+            width: 100vw;
+            height: 100vh;
         }
     </style>
 </head>
 <body>
+    <a-scene>
+        <a-sky color="#000"></a-sky>
+        <a-text id="title" value="Island of the Fairies" position="0 2 -3" align="center" color="white" scale="2 2 2" opacity="0"></a-text>
+        <a-camera>
+            <a-cursor color="red"></a-cursor>
+        </a-camera>
+    </a-scene>
     <button id="enterButton">Enter</button>
-    <div id="title">Island of the Fairies</div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let enterButton = document.getElementById("enterButton");
+            let title = document.getElementById("title");
 
             if (!enterButton) {
                 console.error("Enter button not found in DOM.");
@@ -60,12 +69,10 @@
                 event.preventDefault();
                 event.stopPropagation();
 
-                console.log("Enter button clicked!"); // Debugging
-                alert("Button clicked!"); // Simple test alert
-
-                this.style.display = "none"; // Hide button
-                let title = document.getElementById("title");
-                title.style.opacity = "1"; // Fade in title
+                console.log("Enter button clicked!");
+                alert("Button clicked!");
+                this.style.display = "none";
+                title.setAttribute("opacity", "1");
 
                 setTimeout(() => {
                     console.log("Redirecting to index.html...");
@@ -73,7 +80,6 @@
                 }, 2500);
             });
 
-            // Ensure button is clickable
             enterButton.style.pointerEvents = "auto";
         });
     </script>
