@@ -11,9 +11,15 @@
             overflow: hidden;
             font-family: Arial, sans-serif;
         }
-        #enterButton, #creditsButton {
+        #buttonContainer {
             position: absolute;
-            z-index: 1000;
+            left: 50%;
+            top: 55%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 20px;
+        }
+        #enterButton, #creditsButton {
             padding: 15px 30px;
             font-size: 20px;
             border: none;
@@ -25,16 +31,6 @@
         }
         #enterButton:hover, #creditsButton:hover {
             background: gray;
-        }
-        #enterButton {
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-        #creditsButton {
-            left: 50%;
-            top: 60%;
-            transform: translate(-50%, -50%);
         }
         #title {
             position: absolute;
@@ -52,15 +48,17 @@
 </head>
 <body>
     <a-scene>
-        <a-sky color="#000"></a-sky>
+        <a-sky src="water-texture.jpg"></a-sky>
         <a-text id="title" value="Island of the Fairies" position="0 2 -3" align="center" color="white" scale="2 2 2"></a-text>
         <a-camera>
             <a-cursor color="red"></a-cursor>
         </a-camera>
     </a-scene>
-    <button id="enterButton">Enter</button>
-    <button id="creditsButton">Credits</button>
-
+    <div id="buttonContainer">
+        <button id="enterButton">Enter</button>
+        <button id="creditsButton">Credits</button>
+    </div>
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let enterButton = document.getElementById("enterButton");
