@@ -6,6 +6,7 @@
     <title>Island of the Fairies</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
         body {
             margin: 0;
             overflow: hidden;
@@ -14,7 +15,7 @@
         #buttonContainer {
             position: absolute;
             left: 50%;
-            top: 55%;
+            top: 65%;
             transform: translate(-50%, -50%);
             display: flex;
             gap: 20px;
@@ -28,13 +29,25 @@
             cursor: pointer;
             transition: 0.3s;
             pointer-events: auto;
+            position: absolute;
         }
         #enterButton:hover, #creditsButton:hover {
             background: gray;
         }
+        #enterButton {
+            left: 40%;
+            top: 55%;
+            transform: translate(-50%, -50%);
+        }
+        #creditsButton {
+            left: 60%;
+            top: 55%;
+            transform: translate(-50%, -50%);
+        }
         #title {
             position: absolute;
-            font-size: 50px;
+            font-size: 60px;
+            font-family: 'Great Vibes', cursive;
             color: white;
             left: 50%;
             top: 40%;
@@ -49,15 +62,14 @@
 <body>
     <a-scene>
         <a-sky src="water-texture.jpg"></a-sky>
-        <a-text id="title" value="Island of the Fairies" position="0 2 -3" align="center" color="white" scale="2 2 2"></a-text>
+        <a-text id="title" value="Island of the Fairies" position="0 2 -3" align="center" color="white" scale="2 2 2" font="https://cdn.aframe.io/fonts/GreatVibes.fnt"></a-text>
         <a-camera>
             <a-cursor color="red"></a-cursor>
         </a-camera>
     </a-scene>
-    <div id="buttonContainer">
-        <button id="enterButton">Enter</button>
-        <button id="creditsButton">Credits</button>
-    </div>
+    <div id="title">Island of the Fairies</div>
+    <button id="enterButton">Enter</button>
+    <button id="creditsButton">Credits</button>
     
     <script>
         document.addEventListener("DOMContentLoaded", function() {
