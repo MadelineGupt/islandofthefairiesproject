@@ -9,17 +9,18 @@
         <!-- Sky (Background) -->
         <a-sky color="#000"></a-sky>
 
-        <!-- VR Video (Fullscreen, Now 1.5x Larger) -->
+        <!-- VR Video (Larger) -->
         <a-video id="videoPlayer" position="0 1.5 -6" width="12" height="6"></a-video>
 
-        <!-- Back Button (Interactive) -->
-        <a-entity id="backButton" geometry="primitive: plane; width: 0.25; height: 0.1"
+        <!-- Back Button (Larger, Positioned to the Left) -->
+        <a-entity id="backButton" 
+                  geometry="primitive: plane; width: 1; height: 0.4; radius: 0.1"
                   material="color: gray; opacity: 1"
-                  position="3.5 -.25 -5.8"
+                  position="-6 1.5 -5.8"
                   class="clickable"
                   event-set__mouseenter="material.color: red"
                   event-set__mouseleave="material.color: gray">
-            <a-text value="Back" align="center" position="0 0 0.1" color="white"></a-text>
+            <a-text value="⬅ Back" align="center" position="0 0 0.1" color="white" width="2"></a-text>
         </a-entity>
 
         <!-- Camera with Look and Movement Controls -->
@@ -41,10 +42,8 @@
 
         // Ensure the back button is clickable
         document.getElementById("backButton").addEventListener("click", () => {
-            console.log("Back button clicked!"); // Debugging log
             window.location.href = "map.html";
         });
     </script>
 </body>
 </html>
-how do I make my vidoes have a pause button
