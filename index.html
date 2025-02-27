@@ -3,52 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebXR Canoe Experience (Night Mode)</title>
+    <title>WebXR Canoe Experience</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.min.js"></script>
 </head>
 <body>
     <a-scene>
-        <!-- Seamless Night Sky with Stars (No Ground to Preserve Ocean) -->
-        <a-entity environment="preset: contact; skyType: atmosphere; ground: none;"></a-entity>
+        <!-- Soft Sky Background -->
+        <a-sky src="sky.jpg"></a-sky>
 
-        <!-- 🌙 Moonlight (Bright Enough to See the Map & Canoe) -->
-        <a-light type="directional" color="#ffffff" position="-1 4 -2" intensity="1.7" cast-shadow="true"></a-light>
-        
-        <!-- ✨ Soft Ambient Night Glow (Blueish Hue) -->
-        <a-light type="ambient" color="#444488" intensity="0.6"></a-light>
-
-        <!-- 🌊 Ocean Water with Reflective Moonlight Effect -->
+        <!-- Realistic Water -->
         <a-entity id="water"
                   geometry="primitive: plane; width: 200; height: 200"
                   rotation="-90 0 0"
                   position="0 0 -3"
-                  material="color: #1a3351; src: water-texture.jpg; shader: standard; metalness: 0.5; roughness: 0.2; opacity: 0.9;">
+                  material="color: #3d7d92; src: water-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.3; opacity: 0.85;">
         </a-entity>
 
-        <!-- 🎥 Camera Rig with VR Movement -->
+        <!-- Camera Rig with VR Movement -->
         <a-entity id="camera-rig" position="0 -0.5 0" movement-controls="constrainToNavMesh: true">
             <a-entity id="camera" camera position="0 .9 -.5" look-controls>
-                <a-cursor color="white"></a-cursor>
+                <a-cursor color="black"></a-cursor>
+            </a-entity>
+
+            <!-- Left Hand Controller -->
+            <a-entity id="left-hand"
+                      laser-controls="hand: left"
+                      oculus-touch-controls="hand: left"
+                      vive-controls="hand: left"
+                      windows-motion-controls="hand: left"
+                      daydream-controls="hand: left"
+                      gearvr-controls="hand: left"
+                      generic-tracked-controller-controls="hand: left">
+            </a-entity>
+
+            <!-- Right Hand Controller -->
+            <a-entity id="right-hand"
+                      laser-controls="hand: right"
+                      oculus-touch-controls="hand: right"
+                      vive-controls="hand: right"
+                      windows-motion-controls="hand: right"
+                      daydream-controls="hand: right"
+                      gearvr-controls="hand: right"
+                      generic-tracked-controller-controls="hand: right">
+            </a-entity>
+
+            <!-- Canoe with a Proper Divet -->
+            <a-entity id="canoe" position="0 .4 0" scale="0.3 0.3 0.3">
+                <!-- Outer Canoe Body -->
+                <a-cylinder position="0 0 -1.5" radius="0.8" height="4" open-ended="true"
+                            material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7; side: double;"
+                            rotation="90 0 0">
+                </a-cylinder>
+
+                <!-- Canoe Hollow Interior -->
+                <a-cylinder position="0 0.25 -1.2" radius="0.6" height="3.5" open-ended="true"
+                            material="color: #291810; shader: standard; metalness: 0.1; roughness: 0.9; side: double;"
+                            rotation="90 0 0">
+                </a-cylinder>
+
+                <!-- Canoe Front & Back Caps -->
+                <a-sphere position="0 0 -3.5" radius="0.8"
+                          material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;">
+                </a-sphere>
+
+                <a-sphere position="0 0 0.5" radius="0.8"
+                          material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;">
+                </a-sphere>
             </a-entity>
         </a-entity>
 
-        <!-- 🛶 Canoe (Subtle Lighting for Visibility) -->
-        <a-entity id="canoe" position="0 .4 0" scale="0.3 0.3 0.3">
-            <a-cylinder position="0 0 -1.5" radius="0.8" height="4" open-ended="true"
-                        material="src: wood-texture.jpg; shader: standard; metalness: 0.3; roughness: 0.6; emissive: #222222; emissiveIntensity: 0.2;"
-                        rotation="90 0 0">
-            </a-cylinder>
-        </a-entity>
-
-        <!-- 🗺️ Floating Map (Now Clearly Visible in Moonlight) -->
+        <!-- Floating Map -->
         <a-image id="map" src="map.png" position="0 2 -3" width="5" height="6"
-                 material="shader: standard; metalness: 0.1; roughness: 0.8; emissive: #ffffff; emissiveIntensity: 0.5;"
+                 material="shader: standard; metalness: 0.1; roughness: 0.8;"
                  animation="property: position; from: 0 2 -3; to: 0 2.1 -3; dur: 2000; dir: alternate; loop: true; easing: easeInOutSine">
         </a-image>
 
-        <!-- 🐢 Clickable Turtle Icons (Interactive Elements) -->
+        <!-- Clickable Turtle Icons (Lowered Positions) -->
         <a-entity position="0 1.5 -2.8">
             <script>
                 let turtlePositions = [
@@ -58,13 +89,13 @@
                 ];
 
                 for (let i = 0; i < 15; i++) {
-                    document.write(`
+                    document.write(
                         <a-image id="area${i + 1}" src="turtle.png"
                                  position="${turtlePositions[i][0]} ${turtlePositions[i][1]} ${turtlePositions[i][2]}"
                                  width="0.15" height="0.15"
                                  class="clickable" look-at="#camera">
                         </a-image>
-                    `);
+                    );
                 }
             </script>
         </a-entity>
@@ -77,13 +108,13 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             for (let i = 1; i <= 15; i++) {
-                document.querySelector(`#area${i}`).addEventListener("click", function () {
-                    goToVideo(`https://storage.googleapis.com/islandofthefairies/video${i}.mov`);
+                document.querySelector(#area${i}).addEventListener("click", function () {
+                    goToVideo(https://storage.googleapis.com/islandofthefairies/video${i}.mov);
                 });
             }
         });
 
-        // 🎮 Register Paddle Animation for Non-VR Users
+        // Register Paddle Animation for Non-VR Users
         AFRAME.registerComponent("paddle-movement", {
             init: function () {
                 let rig = document.querySelector("#camera-rig");
@@ -92,6 +123,7 @@
                     if (event.key === "w" || event.key === "s") {
                         let direction = event.key === "w" ? -1 : 1;
 
+                        // Move Canoe Forward/Backward Smoothly
                         let currentPosition = rig.getAttribute("position");
                         rig.setAttribute("animation", {
                             property: "position.z",
