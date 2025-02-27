@@ -29,31 +29,33 @@
         #backButton:hover {
             background: gray;
         }
-        .credits-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 600px;
-            font-size: 20px;
-        }
     </style>
 </head>
 <body>
     <a-scene>
-        <a-sky color="#000"></a-sky>
-        <a-camera>
+        <a-sky src="water-texture.jpg"></a-sky>
+        <a-camera position="0 1.6 0">
             <a-cursor color="red"></a-cursor>
         </a-camera>
+
+        <a-entity position="0 2 -3">
+            <a-text value="Credits" align="center" color="white" scale="2 2 2"></a-text>
+        </a-entity>
+        
+        <a-entity position="0 1.5 -3">
+            <a-text value="Audios: Ojibwe.net and the Library of Congress through Margaret Noodin" align="center" color="white" width="2.5"></a-text>
+        </a-entity>
+        
+        <a-entity position="0 1.2 -3">
+            <a-text value="Map Design: Caitlyn Newago" align="center" color="white" width="2.5"></a-text>
+        </a-entity>
+        
+        <a-entity position="0 0.9 -3">
+            <a-text value="Special thanks to: the XRPeds Lab at Yale University and the Aspen Institute for their generous financial support" align="center" color="white" width="2.5"></a-text>
+        </a-entity>
     </a-scene>
+
     <button id="backButton">Back</button>
-    <div class="credits-content">
-        <h1>Credits</h1>
-        <p><strong>Audios:</strong> Ojibwe.net and the Library of Congress through Margaret Noodin</p>
-        <p><strong>Map Design:</strong> Caitlyn Newago</p>
-        <p><strong>Special thanks to:</strong> the XRPeds Lab at Yale University and the Aspen Institute for their generous financial support</p>
-    </div>
     
     <script>
         document.getElementById("backButton").addEventListener("click", function() {
