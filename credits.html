@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credits</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+        }
+        #backButton {
+            position: absolute;
+            z-index: 1000;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background: white;
+            color: black;
+            cursor: pointer;
+            transition: 0.3s;
+            top: 10px;
+            left: 10px;
+        }
+        #backButton:hover {
+            background: gray;
+        }
+        .credits-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a-scene>
+        <a-sky color="#000"></a-sky>
+        <a-camera>
+            <a-cursor color="red"></a-cursor>
+        </a-camera>
+    </a-scene>
+    <button id="backButton">Back</button>
+    <div class="credits-content">
+        <h1>Credits</h1>
+        <p>Fill in the names, roles, and contributions here.</p>
+    </div>
+    
+    <script>
+        document.getElementById("backButton").addEventListener("click", function() {
+            window.location.href = "opening.html";
+        });
+    </script>
+</body>
+</html>
