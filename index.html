@@ -11,7 +11,7 @@
             overflow: hidden;
             font-family: Arial, sans-serif;
         }
-        #enterButton {
+        #enterButton, #creditsButton {
             position: absolute;
             z-index: 1000;
             padding: 15px 30px;
@@ -22,12 +22,19 @@
             cursor: pointer;
             transition: 0.3s;
             pointer-events: auto;
+        }
+        #enterButton:hover, #creditsButton:hover {
+            background: gray;
+        }
+        #enterButton {
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
         }
-        #enterButton:hover {
-            background: gray;
+        #creditsButton {
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%, -50%);
         }
         #title {
             position: absolute;
@@ -52,28 +59,32 @@
         </a-camera>
     </a-scene>
     <button id="enterButton">Enter</button>
+    <button id="creditsButton">Credits</button>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let enterButton = document.getElementById("enterButton");
+            let creditsButton = document.getElementById("creditsButton");
 
-            if (!enterButton) {
-                console.error("Enter button not found in DOM.");
+            if (!enterButton || !creditsButton) {
+                console.error("Buttons not found in DOM.");
                 return;
             }
 
             enterButton.addEventListener("click", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
-                
-                this.style.display = "none";
-                
-                setTimeout(() => {
-                    window.location.href = "map.html";
-                }, 2500);
+                window.location.href = "index.html";
+            });
+
+            creditsButton.addEventListener("click", function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                window.location.href = "credits.html";
             });
 
             enterButton.style.pointerEvents = "auto";
+            creditsButton.style.pointerEvents = "auto";
         });
     </script>
 </body>
