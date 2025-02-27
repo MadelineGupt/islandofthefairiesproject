@@ -9,26 +9,20 @@
         <!-- Sky (Background) -->
         <a-sky color="#000"></a-sky>
 
-        <!-- VR Video -->
+        <!-- VR Video (Fullscreen, Now 1.5x Larger) -->
         <a-video id="videoPlayer" position="0 1.5 -6" width="12" height="6"></a-video>
 
-        <!-- Back Button -->
-        <a-entity id="backButton" geometry="primitive: plane; width: 0.4; height: 0.15"
+        <!-- Back Button (Interactive) -->
+        <a-entity id="backButton" geometry="primitive: plane; width: 0.25; height: 0.1"
                   material="color: gray; opacity: 1"
                   position="3.5 -.25 -5.8"
-                  class="clickable">
+                  class="clickable"
+                  event-set__mouseenter="material.color: red"
+                  event-set__mouseleave="material.color: gray">
             <a-text value="Back" align="center" position="0 0 0.1" color="white"></a-text>
         </a-entity>
 
-        <!-- Pause/Play Button -->
-        <a-entity id="pauseButton" geometry="primitive: plane; width: 0.4; height: 0.15"
-                  material="color: gray; opacity: 1"
-                  position="3.5 -.5 -5.8"
-                  class="clickable">
-            <a-text id="pauseButtonText" value="Pause" align="center" position="0 0 0.1" color="white"></a-text>
-        </a-entity>
-
-        <!-- Camera with Look Controls -->
+        <!-- Camera with Look and Movement Controls -->
         <a-entity id="cameraRig" position="0 1.6 0">
             <a-entity camera look-controls wasd-controls="acceleration: 15">
                 <a-cursor color="red" fuse="false"></a-cursor>
@@ -37,33 +31,20 @@
     </a-scene>
 
     <script>
-        // Get video source from URL
+        // Extract video source from URL
         const params = new URLSearchParams(window.location.search);
         const videoSrc = params.get("video");
-        const videoPlayer = document.getElementById("videoPlayer");
 
         if (videoSrc) {
-            videoPlayer.setAttribute("src", videoSrc);
+            document.getElementById("videoPlayer").setAttribute("src", videoSrc);
         }
 
-        // Back Button Click
+        // Ensure the back button is clickable
         document.getElementById("backButton").addEventListener("click", () => {
-            window.location.href = "index.html";
-        });
-
-        // Pause Button Click
-        const pauseButton = document.getElementById("pauseButton");
-        const pauseButtonText = document.getElementById("pauseButtonText");
-
-        pauseButton.addEventListener("click", () => {
-            if (videoPlayer.paused) {
-                videoPlayer.play();
-                pauseButtonText.setAttribute("value", "Pause");
-            } else {
-                videoPlayer.pause();
-                pauseButtonText.setAttribute("value", "Play");
-            }
+            console.log("Back button clicked!"); // Debugging log
+            window.location.href = "map.html";
         });
     </script>
 </body>
 </html>
+how do I make my vidoes have a pause button
