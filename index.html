@@ -19,6 +19,7 @@
         }
         #enterButton {
             position: absolute;
+            z-index: 1000; /* Ensure it's on top */
             padding: 15px 30px;
             font-size: 20px;
             border: none;
@@ -26,6 +27,7 @@
             color: black;
             cursor: pointer;
             transition: 0.3s;
+            pointer-events: auto; /* Ensure button can be clicked */
         }
         #enterButton:hover {
             background: gray;
@@ -35,6 +37,9 @@
             font-size: 50px;
             opacity: 0;
             transition: opacity 2s;
+        }
+        a-scene {
+            pointer-events: none !important; /* Prevent A-Frame from blocking clicks */
         }
     </style>
 </head>
@@ -46,22 +51,29 @@
         document.addEventListener("DOMContentLoaded", function() {
             let enterButton = document.getElementById("enterButton");
 
-            enterButton.addEventListener("click", function(event) {
-                event.preventDefault(); // Prevent any default behaviors
-                event.stopPropagation(); // Stop event from being intercepted
+            if (!enterButton) {
+                console.error("Enter button not found in DOM.");
+                return;
+            }
 
-                console.log("Enter button clicked!"); // Debugging log
+            enterButton.addEventListener("click", function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                console.log("Enter button clicked!"); // Debugging
+                alert("Button clicked!"); // Simple test alert
 
                 this.style.display = "none"; // Hide button
                 let title = document.getElementById("title");
                 title.style.opacity = "1"; // Fade in title
 
                 setTimeout(() => {
+                    console.log("Redirecting to index.html...");
                     window.location.href = "index.html";
-                }, 2500); // Delay transition to main scene
+                }, 2500);
             });
 
-            // Ensure the button is properly clickable
+            // Ensure button is clickable
             enterButton.style.pointerEvents = "auto";
         });
     </script>
