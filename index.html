@@ -32,8 +32,6 @@
         #title {
             position: absolute;
             font-size: 50px;
-            opacity: 0;
-            transition: opacity 2s;
             color: white;
             left: 50%;
             top: 40%;
@@ -48,7 +46,7 @@
 <body>
     <a-scene>
         <a-sky color="#000"></a-sky>
-        <a-text id="title" value="Island of the Fairies" position="0 2 -3" align="center" color="white" scale="2 2 2" opacity="0"></a-text>
+        <a-text id="title" value="Island of the Fairies" position="0 2 -3" align="center" color="white" scale="2 2 2"></a-text>
         <a-camera>
             <a-cursor color="red"></a-cursor>
         </a-camera>
@@ -58,7 +56,6 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let enterButton = document.getElementById("enterButton");
-            let title = document.getElementById("title");
 
             if (!enterButton) {
                 console.error("Enter button not found in DOM.");
@@ -68,14 +65,10 @@
             enterButton.addEventListener("click", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
-
-                console.log("Enter button clicked!");
-                alert("Button clicked!");
+                
                 this.style.display = "none";
-                title.setAttribute("opacity", "1");
-
+                
                 setTimeout(() => {
-                    console.log("Redirecting to map.html...");
                     window.location.href = "map.html";
                 }, 2500);
             });
