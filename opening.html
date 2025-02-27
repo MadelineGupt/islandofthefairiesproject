@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Island of the Fairies</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #enterButton {
+            position: absolute;
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            background: white;
+            color: black;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #enterButton:hover {
+            background: gray;
+        }
+        #title {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+    </style>
+</head>
+<body>
+    <button id="enterButton">Enter</button>
+    <div id="title">Island of the Fairies</div>
+
+    <script>
+        document.getElementById("enterButton").addEventListener("click", function() {
+            this.style.display = "none"; // Hide button
+            let title = document.getElementById("title");
+            title.style.opacity = "1"; // Fade in title
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 2500); // Delay transition to main scene
+        });
+    </script>
+</body>
+</html>
