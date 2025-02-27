@@ -43,14 +43,26 @@
     <div id="title">Island of the Fairies</div>
 
     <script>
-        document.getElementById("enterButton").addEventListener("click", function() {
-            this.style.display = "none"; // Hide button
-            let title = document.getElementById("title");
-            title.style.opacity = "1"; // Fade in title
+        document.addEventListener("DOMContentLoaded", function() {
+            let enterButton = document.getElementById("enterButton");
 
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 2500); // Delay transition to main scene
+            enterButton.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent any default behaviors
+                event.stopPropagation(); // Stop event from being intercepted
+
+                console.log("Enter button clicked!"); // Debugging log
+
+                this.style.display = "none"; // Hide button
+                let title = document.getElementById("title");
+                title.style.opacity = "1"; // Fade in title
+
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 2500); // Delay transition to main scene
+            });
+
+            // Ensure the button is properly clickable
+            enterButton.style.pointerEvents = "auto";
         });
     </script>
 </body>
