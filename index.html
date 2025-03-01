@@ -32,26 +32,26 @@
 </head>
 <body>
     <a-scene>
-        <a-sky src="water-texture.jpg"></a-sky>
+        <a-sky src="water-texture.jpg" rotation="0 180 0"></a-sky>
         
-        <!-- VR-Compatible Title -->
-        <a-entity position="0 2 -3">
-            <a-text value="Island of the Fairies" align="center" color="white" width="4" scale="2 2 2"></a-text>
+        <!-- VR-Compatible Title with Cinzel Font -->
+        <a-entity position="0 2.2 -3">
+            <a-text value="Island of the Fairies" align="center" color="white" width="4" scale="2 2 2" font="https://cdn.aframe.io/fonts/Cinzel.fnt"></a-text>
         </a-entity>
         
-        <!-- VR-Compatible Buttons -->
-        <a-entity id="buttonContainer" position="0 1.5 -3">
-            <a-entity id="enterButton" geometry="primitive: plane; width: 1.5; height: 0.5"
+        <!-- VR-Compatible Buttons, Smaller and Lower -->
+        <a-entity id="buttonContainer" position="0 1.2 -3">
+            <a-entity id="enterButton" geometry="primitive: plane; width: 1.2; height: 0.4"
                       material="color: white; opacity: 0.8"
-                      position="-1 0 0"
-                      text="value: Enter; align: center; color: black; width: 4"
+                      position="-0.8 -0.3 0"
+                      text="value: Enter; align: center; color: black; width: 3; font: https://cdn.aframe.io/fonts/Cinzel.fnt"
                       class="clickable">
             </a-entity>
             
-            <a-entity id="creditsButton" geometry="primitive: plane; width: 1.5; height: 0.5"
+            <a-entity id="creditsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
                       material="color: white; opacity: 0.8"
-                      position="1 0 0"
-                      text="value: Credits; align: center; color: black; width: 4"
+                      position="0.8 -0.3 0"
+                      text="value: Credits; align: center; color: black; width: 3; font: https://cdn.aframe.io/fonts/Cinzel.fnt"
                       class="clickable">
             </a-entity>
         </a-entity>
