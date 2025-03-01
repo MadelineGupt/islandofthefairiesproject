@@ -13,30 +13,32 @@
         <!-- Environment Component for Seamless Sky and Ground -->
         <a-entity environment="preset: contact; skyType: atmosphere; ground: none; dressing: none; horizonColor: #88ccee"></a-entity>
 
-        <!-- Realistic Water -->
+        <!-- Moving Water -->
         <a-entity id="water"
                   geometry="primitive: plane; width: 200; height: 200"
                   rotation="-90 0 0"
                   position="0 0 -3"
-                  material="color: #3d7d92; src: water-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.3; opacity: 0.85;">
+                  material="color: #3d7d92; src: water-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.3; opacity: 0.85;"
+                  animation="property: material.offset; to: 1 1; dur: 4000; loop: true; easing: linear;">
         </a-entity>
 
-        <!-- Camera Rig with VR Movement -->
-        <a-entity id="camera-rig" position="0 0 0" movement-controls="constrainToNavMesh: true">
-            <a-entity id="camera" camera position="0 1.6 0" look-controls>
+        <!-- Camera Rig (Lowered Closer to Water) -->
+        <a-entity id="camera-rig" position="0 0.8 0" movement-controls="constrainToNavMesh: true">
+            <a-entity id="camera" camera position="0 1.3 0" look-controls>
                 <a-cursor color="black"></a-cursor>
             </a-entity>
         </a-entity>
 
-        <!-- Enlarged Flat Map on Water -->
+        <!-- Floating Map (Now Bobs Up and Down) -->
         <a-image id="map" src="map.png"
                  position="0 0.1 -3"
                  rotation="-90 0 0"
-                 width="10" height="12"  <!-- Doubled size -->
-                 material="shader: standard; metalness: 0.1; roughness: 0.8;">
+                 width="10" height="12"
+                 material="shader: standard; metalness: 0.1; roughness: 0.8;"
+                 animation="property: position.y; from: 0.1; to: 0.2; dur: 3000; dir: alternate; loop: true; easing: easeInOutSine;">
         </a-image>
 
-        <!-- Glowing Red Pins with Floating Turtle Icons -->
+        <!-- Floating Pins & Turtles with Bobbing Effect -->
         <a-entity id="pins-container">
             <script>
                 let pinPositions = [
@@ -47,18 +49,20 @@
 
                 for (let i = 0; i < 15; i++) {
                     document.write(`
-                        <!-- Thin Red Pin -->
+                        <!-- Thin Red Pin (Bobbing) -->
                         <a-cylinder id="pin${i + 1}" 
                                     position="${pinPositions[i][0]} 0.3 ${pinPositions[i][2]}"
                                     radius="0.02" height="0.5"
-                                    material="color: red; emissive: #ff0000; emissiveIntensity: 0.8; shader: standard;">
+                                    material="color: red; emissive: #ff0000; emissiveIntensity: 0.8; shader: standard;"
+                                    animation="property: position.y; from: 0.3; to: 0.35; dur: 2500; dir: alternate; loop: true; easing: easeInOutSine;">
                         </a-cylinder>
 
-                        <!-- Floating Turtle Icon (Clickable) -->
+                        <!-- Floating Turtle Icon (Bobbing + Clickable) -->
                         <a-image id="turtle${i + 1}" src="turtle.png"
                                  position="${pinPositions[i][0]} 0.8 ${pinPositions[i][2]}"
                                  width="0.2" height="0.2"
-                                 class="clickable">
+                                 class="clickable"
+                                 animation="property: position.y; from: 0.8; to: 0.85; dur: 2500; dir: alternate; loop: true; easing: easeInOutSine;">
                         </a-image>
                     `);
                 }
