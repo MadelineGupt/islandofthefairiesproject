@@ -7,6 +7,13 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.min.js"></script>
+    <style>
+        /* Smooth fade-in effect */
+        body {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+    </style>
 </head>
 <body>
     <a-scene>
@@ -21,8 +28,8 @@
                   material="color: #3d7d92; src: water-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.3; opacity: 0.85;">
         </a-entity>
 
-        <!-- Camera Rig with VR Movement -->
-        <a-entity id="camera-rig" position="0 0 0" movement-controls="constrainToNavMesh: true">
+        <!-- Camera Rig with Falling Animation -->
+        <a-entity id="camera-rig" position="0 10 0" movement-controls="constrainToNavMesh: true">
             <a-entity id="camera" camera position="0 1 0" look-controls>
                 <a-cursor color="black"></a-cursor>
             </a-entity>
@@ -32,7 +39,7 @@
         <a-image id="map" src="map.png"
                  position="0 0.1 -3"
                  rotation="-90 0 0"
-                 width="10" height="12"  <!-- Doubled size --
+                 width="10" height="12"
                  material="shader: standard; metalness: 0.1; roughness: 0.8;"
                  animation="property: position.y; from: 0.1; to: 0.2; dur: 3000; dir: alternate; loop: true; easing: easeInOutSine;">
         </a-image>
@@ -68,17 +75,32 @@
     </a-scene>
 
     <script>
-        function goToVideo(videoSrc) {
-            window.location.href = "video.html?video=" + encodeURIComponent(videoSrc);
-        }
-
         document.addEventListener("DOMContentLoaded", function () {
+            // Smooth fade-in effect
+            document.body.style.opacity = "1";  
+
+            let cameraRig = document.querySelector("#camera-rig");
+
+            // Animate the camera falling from the sky
+            cameraRig.setAttribute("animation", {
+                property: "position",
+                from: "0 10 0",
+                to: "0 0 0",
+                dur: 2000,  // Duration of fall
+                easing: "easeOutBounce"
+            });
+
+            // Clickable turtle pins for video links
             for (let i = 1; i <= 15; i++) {
                 document.querySelector(`#turtle${i}`).addEventListener("click", function () {
                     goToVideo(`https://storage.googleapis.com/islandofthefairies/video${i}.mov`);
                 });
             }
         });
+
+        function goToVideo(videoSrc) {
+            window.location.href = "video.html?video=" + encodeURIComponent(videoSrc);
+        }
 
         // Register Paddle Movement for Non-VR Users
         AFRAME.registerComponent("paddle-movement", {
