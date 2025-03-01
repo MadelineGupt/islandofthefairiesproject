@@ -29,7 +29,7 @@
         </a-entity>
 
         <!-- Camera Rig with Falling Animation -->
-        <a-entity id="camera-rig" position="0 10 0" movement-controls="constrainToNavMesh: true">
+        <a-entity id="camera-rig" movement-controls="constrainToNavMesh: true">
             <a-entity id="camera" camera position="0 1 0" look-controls>
                 <a-cursor color="black"></a-cursor>
             </a-entity>
@@ -81,14 +81,18 @@
 
             let cameraRig = document.querySelector("#camera-rig");
 
-            // Animate the camera falling from the sky
-            cameraRig.setAttribute("animation", {
-                property: "position",
-                from: "0 10 0",
-                to: "0 0 0",
-                dur: 2000,  // Duration of fall
-                easing: "easeOutBounce"
-            });
+            // Ensure the camera starts high up
+            cameraRig.setAttribute("position", { x: 0, y: 10, z: 0 });
+
+            // Apply the falling animation after a short delay
+            setTimeout(() => {
+                cameraRig.setAttribute("animation", {
+                    property: "position",
+                    to: "0 0 0",
+                    dur: 2000,  // Adjust time (2000ms = 2s)
+                    easing: "easeOutBounce"
+                });
+            }, 500); // Small delay to ensure the page loads first
 
             // Clickable turtle pins for video links
             for (let i = 1; i <= 15; i++) {
