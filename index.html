@@ -57,6 +57,18 @@
             width: 100vw;
             height: 100vh;
         }
+        /* Footer Styles */
+        #footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: white;
+            font-family: 'Cinzel', serif;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 0;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +82,12 @@
     <div id="title">Island of the Fairies</div>
     <button id="enterButton">Enter</button>
     <button id="creditsButton">Credits</button>
-    
+
+    <!-- Copyright Footer -->
+    <div id="footer">
+        © 2025 Island of the Fairies. All rights reserved.
+    </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let enterButton = document.getElementById("enterButton");
