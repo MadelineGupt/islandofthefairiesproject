@@ -21,34 +21,11 @@
                   material="color: #3d7d92; src: water-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.3; opacity: 0.85;">
         </a-entity>
 
-        <!-- Camera Rig with VR Movement (Inside Canoe) -->
-        <a-entity id="camera-rig" position="0 -0.3 0" movement-controls="constrainToNavMesh: true">
-            <a-entity id="camera" camera position="0 .9 -.5" look-controls>
+        <!-- Camera Rig with VR Movement -->
+        <a-entity id="camera-rig" position="0 0 0" movement-controls="constrainToNavMesh: true">
+            <a-entity id="camera" camera position="0 1.6 0" look-controls>
                 <a-cursor color="black"></a-cursor>
             </a-entity>
-        </a-entity>
-
-        <!-- Canoe Positioned Correctly -->
-        <a-entity id="canoe" position="0 -0.2 0" scale="1 1 1">
-            <!-- Main Canoe Body -->
-            <a-cylinder position="0 -0.4 -1.5" radius="0.8" height="4" open-ended="true"
-                        material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7; side: double;"
-                        rotation="90 0 0">
-            </a-cylinder>
-
-            <!-- Canoe Interior -->
-            <a-cylinder position="0 -0.35 -1.2" radius="0.6" height="3.5" open-ended="true"
-                        material="color: #291810; shader: standard; metalness: 0.1; roughness: 0.9; side: double;"
-                        rotation="90 0 0">
-            </a-cylinder>
-
-            <!-- Canoe Front & Back -->
-            <a-sphere position="0 -0.4 -3.5" radius="0.8"
-                      material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;">
-            </a-sphere>
-            <a-sphere position="0 -0.4 0.5" radius="0.8"
-                      material="src: wood-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.7;">
-            </a-sphere>
         </a-entity>
 
         <!-- Flat Map on Water -->
