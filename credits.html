@@ -13,53 +13,53 @@
             text-align: center;
             color: white;
         }
-        #backButton {
-            position: absolute;
-            z-index: 1000;
-            padding: 10px 20px;
-            font-size: 18px;
-            border: none;
-            background: white;
-            color: black;
-            cursor: pointer;
-            transition: 0.3s;
-            top: 10px;
-            left: 10px;
-        }
-        #backButton:hover {
-            background: gray;
-        }
     </style>
 </head>
 <body>
     <a-scene>
         <a-sky src="water-texture.jpg"></a-sky>
+        
         <a-camera position="0 1.6 0">
-            <a-cursor color="red"></a-cursor>
+            <a-cursor color="white" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;" material="color: white; shader: flat;" position="0 0 -1"></a-cursor>
         </a-camera>
-
+        
         <a-entity position="0 2 -3">
-            <a-text value="Credits" align="center" color="white" scale="2 2 2"></a-text>
+            <a-text value="Credits" align="center" color="white" width="4"></a-text>
         </a-entity>
         
         <a-entity position="0 1.5 -3">
-            <a-text value="Audios: Ojibwe.net and the Library of Congress through Margaret Noodin" align="center" color="white" width="2.5"></a-text>
+            <a-text value="Audios: Ojibwe.net and the Library of Congress through Margaret Noodin" align="center" color="white" width="4"></a-text>
         </a-entity>
         
         <a-entity position="0 1.2 -3">
-            <a-text value="Map Design: Caitlyn Newago" align="center" color="white" width="2.5"></a-text>
+            <a-text value="Map Design: Caitlyn Newago" align="center" color="white" width="4"></a-text>
         </a-entity>
         
         <a-entity position="0 0.9 -3">
-            <a-text value="Special thanks to: the XRPeds Lab at Yale University and the Aspen Institute for their generous financial support" align="center" color="white" width="2.5"></a-text>
+            <a-text value="Special thanks to: the XRPeds Lab at Yale University and the Aspen Institute for their generous financial support" align="center" color="white" width="4"></a-text>
+        </a-entity>
+        
+        <!-- VR-Compatible Back Button -->
+        <a-entity id="backButton" geometry="primitive: plane; width: 1.5; height: 0.5"
+                  material="color: white; opacity: 0.8"
+                  position="0 0.5 -2.5"
+                  text="value: Back; align: center; color: black; width: 3"
+                  class="clickable">
         </a-entity>
     </a-scene>
-
-    <button id="backButton">Back</button>
     
     <script>
-        document.getElementById("backButton").addEventListener("click", function() {
-            window.location.href = "index.html";
+        document.addEventListener("DOMContentLoaded", function() {
+            let backButton = document.querySelector("#backButton");
+            
+            if (!backButton) {
+                console.error("Back button not found in DOM.");
+                return;
+            }
+
+            backButton.addEventListener("click", function() {
+                window.location.href = "index.html";
+            });
         });
     </script>
 </body>
