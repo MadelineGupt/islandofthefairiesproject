@@ -29,7 +29,7 @@
         </a-entity>
 
         <!-- Camera Rig Starts in the Air -->
-        <a-entity id="camera-rig" position="0 8 0" movement-controls="constrainToNavMesh: true">
+        <a-entity id="camera-rig" position="0 8 -10" movement-controls="constrainToNavMesh: true">
             <a-entity id="camera" camera position="0 1 0" look-controls>
                 <a-cursor color="black"></a-cursor>
             </a-entity>
@@ -40,7 +40,7 @@
         <a-entity id="nextButton"
                   geometry="primitive: cone; radiusBottom: 0.4; radiusTop: 0; height: 1"
                   material="color: #ffffff; emissive: #88ccee; emissiveIntensity: 1; transparent: true; opacity: 0.9"
-                  position="0 1 -30"
+                  position="0 6 -30"
                   rotation="0 0 180"
                   class="clickable"
                   animation="property: position.y; from: 6; to: 6.2; dur: 1000; dir: alternate; loop: true; easing: easeInOutSine"
