@@ -36,13 +36,18 @@
         </a-entity>
 
         <!-- Next Button to Trigger Descent -->
-        <a-entity id="nextButton" 
-                  geometry="primitive: plane; width: 1.5; height: 0.5"
-                  material="color: white; opacity: 0.9"
+
+        <a-entity id="nextButton"
+                  geometry="primitive: cone; radiusBottom: 0.4; radiusTop: 0; height: 1"
+                  material="color: #ffffff; emissive: #88ccee; emissiveIntensity: 1; transparent: true; opacity: 0.9"
                   position="0 6 -3"
-                  text="value: ->; align: center; color: black; width: 4"
-                  class="clickable">
+                  rotation="0 0 180"
+                  class="clickable"
+                  animation="property: position.y; from: 6; to: 6.2; dur: 1000; dir: alternate; loop: true; easing: easeInOutSine"
+                  animation__hover="property: scale; from: 1 1 1; to: 1.2 1.2 1.2; startEvents: mouseenter; dur: 200"
+                  animation__leave="property: scale; to: 1 1 1; startEvents: mouseleave; dur: 200">
         </a-entity>
+
 
         <!-- Enlarged Flat Map on Water -->
         <a-image id="map" src="map.png"
