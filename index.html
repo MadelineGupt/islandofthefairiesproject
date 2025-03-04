@@ -32,13 +32,9 @@
     <a-scene>
         <a-sky src="water-texture.jpg" rotation="0 270 0"></a-sky>
         
-        <!-- VR-Compatible Title with a Magical Font -->
-        <a-entity position="0 2 -3">
-            <a-text value="Island of the Fairies" align="center" color="white" width="8" scale="4 4 4" position="0 3 -2.5"
-                    font="https://cdn.aframe.io/fonts/exo2bold-msdf.json">
-            </a-text>
-        </a-entity>
-        
+        <!-- VR-Compatible Title with Magical Font -->
+        <a-entity position="0 3 -4" text="value: Island of the Fairies; align: center; width: 6; color: white; font: mozillavr;"></a-entity>
+
         <!-- VR-Compatible Buttons -->
         <a-entity id="buttonContainer" position="0 1.5 -3">
             <a-entity id="enterButton" geometry="primitive: plane; width: 1.5; height: 0.5"
