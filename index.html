@@ -33,21 +33,31 @@
         <a-sky src="water-texture.jpg" rotation="0 270 0"></a-sky>
         
         <!-- VR-Compatible Title with Magical Font -->
-        <a-entity position="0 3 -4" text="value: Island of the Fairies; align: center; width: 14; color: white; font: mozillavr;"></a-entity>
+        <a-entity position="0 4 -4" text="value: Island of the Fairies; align: center; width: 14; color: white; font: mozillavr;"></a-entity>
 
         <!-- VR-Compatible Buttons -->
         <a-entity id="buttonContainer" position="0 1.5 -3">
-            <a-entity id="enterButton" geometry="primitive: plane; width: 1.5; height: 0.5"
+            <!-- Instructions Button -->
+            <a-entity id="instructionsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
                       material="color: white; opacity: 0.8"
-                      position="-1 0 0"
-                      text="value: Enter; align: center; color: black; width: 4"
+                      position="-2 0 0"
+                      text="value: Instructions; align: center; color: black; width: 3"
                       class="clickable">
             </a-entity>
-            
-            <a-entity id="creditsButton" geometry="primitive: plane; width: 1.5; height: 0.5"
+
+            <!-- Enter Button -->
+            <a-entity id="enterButton" geometry="primitive: plane; width: 1.2; height: 0.4"
                       material="color: white; opacity: 0.8"
-                      position="1 0 0"
-                      text="value: Credits; align: center; color: black; width: 4"
+                      position="0 0 0"
+                      text="value: Enter; align: center; color: black; width: 3"
+                      class="clickable">
+            </a-entity>
+
+            <!-- Credits Button -->
+            <a-entity id="creditsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
+                      material="color: white; opacity: 0.8"
+                      position="2 0 0"
+                      text="value: Credits; align: center; color: black; width: 3"
                       class="clickable">
             </a-entity>
         </a-entity>
@@ -64,13 +74,18 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            let instructionsButton = document.querySelector("#instructionsButton");
             let enterButton = document.querySelector("#enterButton");
             let creditsButton = document.querySelector("#creditsButton");
 
-            if (!enterButton || !creditsButton) {
+            if (!instructionsButton || !enterButton || !creditsButton) {
                 console.error("Buttons not found in DOM.");
                 return;
             }
+
+            instructionsButton.addEventListener("click", function(event) {
+                window.location.href = "instructions.html";
+            });
 
             enterButton.addEventListener("click", function(event) {
                 window.location.href = "map.html";
