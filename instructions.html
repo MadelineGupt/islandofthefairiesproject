@@ -20,47 +20,63 @@
     <a-sky src="water-texture.jpg" rotation="0 270 0"></a-sky>
 
     <a-camera position="0 1.6 0">
-      <a-cursor color="white" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;" material="color: white; shader: flat;" position="0 0 -1"></a-cursor>
+      <a-cursor color="white" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;" 
+                material="color: white; shader: flat;" position="0 0 -1"></a-cursor>
     </a-camera>
 
     <!-- Title -->
-    <a-entity position="0 3.5 -3">
-      <a-text value="Instructions" align="center" color="white" width="3"></a-text>
+    <a-entity position="0 4 -4">
+      <a-text value="Instructions" align="center" color="white" width="5"></a-text>
     </a-entity>
 
-    <!-- Moderately spaced instructions -->
-    <a-entity position="0 2.7 -3">
-      <a-text value="You can access the experience with a phone, tablet, computer, or VR headset." align="center" color="white" width="4"></a-text>
+    <!-- Column Headers -->
+    <a-entity position="-3 3.3 -4">
+      <a-text value="Phone / Tablet" align="center" color="white" width="3"></a-text>
+    </a-entity>
+    <a-entity position="0 3.3 -4">
+      <a-text value="Computer" align="center" color="white" width="3"></a-text>
+    </a-entity>
+    <a-entity position="3 3.3 -4">
+      <a-text value="VR Headset" align="center" color="white" width="3"></a-text>
     </a-entity>
 
-    <a-entity position="0 2.1 -3">
-      <a-text value="On a phone or tablet, allow access to movement and orientation." align="center" color="white" width="4"></a-text>
+    <!-- Phone / Tablet Instructions -->
+    <a-entity position="-3 2.5 -4">
+      <a-text value="Allow access to motion & orientation." align="center" color="white" width="3"></a-text>
+    </a-entity>
+    <a-entity position="-3 1.9 -4">
+      <a-text value="Move device to look around." align="center" color="white" width="3"></a-text>
+    </a-entity>
+    <a-entity position="-3 1.3 -4">
+      <a-text value="Align cursor with buttons\nto click them." align="center" color="white" width="3"></a-text>
+    </a-entity>
+    <a-entity position="-3 0.7 -4">
+      <a-text value="Press & hold to move forward." align="center" color="white" width="3"></a-text>
     </a-entity>
 
-    <a-entity position="0 1.5 -3">
-      <a-text value="Move the device to look around, and align the cursor with buttons you would like to click, then click them." align="center" color="white" width="4"></a-text>
+    <!-- Computer Instructions -->
+    <a-entity position="0 2.5 -4">
+      <a-text value="Click and drag to look around." align="center" color="white" width="3"></a-text>
+    </a-entity>
+    <a-entity position="0 1.9 -4">
+      <a-text value="Align cursor with buttons to click." align="center" color="white" width="3"></a-text>
+    </a-entity>
+    <a-entity position="0 1.3 -4">
+      <a-text value="Use arrow keys or WASD\nto move around." align="center" color="white" width="3"></a-text>
     </a-entity>
 
-    <a-entity position="0 0.9 -3">
-      <a-text value="Press and hold to move forward." align="center" color="white" width="4"></a-text>
+    <!-- VR Headset Instructions -->
+    <a-entity position="3 2.5 -4">
+      <a-text value="Look around naturally." align="center" color="white" width="3"></a-text>
     </a-entity>
-
-    <a-entity position="0 0.3 -3">
-      <a-text value="On a computer, click and drag to look around. Align the cursor with the buttons you want to click." align="center" color="white" width="4"></a-text>
-    </a-entity>
-
-    <a-entity position="0 -0.3 -3">
-      <a-text value="Use the arrow keys or WASD to move forward, side to side, or backward." align="center" color="white" width="4"></a-text>
-    </a-entity>
-
-    <a-entity position="0 -0.9 -3">
-      <a-text value="On a VR headset, look around naturally. Use the VR controllers to move and interact." align="center" color="white" width="4"></a-text>
+    <a-entity position="3 1.9 -4">
+      <a-text value="Use VR controllers\nto move & interact." align="center" color="white" width="3"></a-text>
     </a-entity>
 
     <!-- Back Button -->
     <a-entity id="backButton" geometry="primitive: plane; width: 1; height: 0.3"
               material="color: white; opacity: 0.8"
-              position="0 -1.8 -2.5"
+              position="0 -0.5 -3"
               text="value: Back; align: center; color: black; width: 3"
               class="clickable">
     </a-entity>
