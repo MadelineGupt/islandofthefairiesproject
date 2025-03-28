@@ -63,7 +63,7 @@
             <script>
                 let pinPositions = [
                     [5.55, 0.2, -6.25], [5.5, 0.2, -4.75], [5.1, 0.2, -5.25], [5, 0.2, -5], [5.5, 0.2, -5.25],
-                    [5.75, 0.2, -8], [5.2, 0.2, -5.5], [5.3, 0.2, -6.35], [5.4, 0.2, -6.3], [5, 0.2, -4.75],
+                    [5.75, 0.2, -8], [5.2, 0.2, -5.5], [5.3, 0.2, -6.35], [5.4, 0.2, -6.3], [5.5, 0.2, -5.75],
                     [-2.1, 0.2, 3], [2.8, 0.2, 1], [-1.5, 0.2, .5], [1.2, 0.2, .8], [0, 0.2, 1]
                 ];
 
@@ -72,14 +72,14 @@
                         <!-- Thin Red Pin -->
                         <a-cylinder id="pin${i + 1}" 
                                     position="${pinPositions[i][0]} 0.3 ${pinPositions[i][2]}"
-                                    radius="0.02" height="0.5"
+                                    radius="0.01" height="0.5"
                                     material="color: red; emissive: #ff0000; emissiveIntensity: 0.8; shader: standard;">
                         </a-cylinder>
 
                         <!-- Floating Turtle Icon (Clickable) -->
                         <a-image id="turtle${i + 1}" src="turtle.png"
                                  position="${pinPositions[i][0]} 0.8 ${pinPositions[i][2]}"
-                                 width="0.2" height="0.2"
+                                 width="0.1" height="0.1"
                                  class="clickable">
                         </a-image>
                     `);
