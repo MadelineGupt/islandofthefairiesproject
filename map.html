@@ -12,6 +12,26 @@
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
     }
+
+    /* Overlay Home Button */
+    #homeOverlayButton {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 9999;
+      background-color: #222;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #homeOverlayButton:hover {
+      background-color: #444;
+    }
   </style>
 </head>
 <body>
@@ -31,18 +51,6 @@
     <a-entity id="camera-rig" position="0 8 10" movement-controls="constrainToNavMesh: true">
       <a-entity id="camera" camera position="0 1 0" look-controls>
         <a-cursor color="black"></a-cursor>
-
-        <!-- Floating Home Button in Camera View -->
-        <a-entity id="home-button"
-                  position="-1.2 -0.8 -2"
-                  geometry="primitive: plane; height: 0.3; width: 0.8"
-                  material="color: #a9b5d1; opacity: 0.9; shader: flat"
-                  text="value: Go Home; align: center; color: #ffffff; width: 4"
-                  class="clickable"
-                  scale="0.5 0.5 0.5"
-                  animation__hover="property: scale; from: 0.5 0.5 0.5; to: 0.6 0.6 0.6; startEvents: mouseenter; dur: 200"
-                  animation__leave="property: scale; to: 0.5 0.5 0.5; startEvents: mouseleave; dur: 200">
-        </a-entity>
       </a-entity>
     </a-entity>
 
@@ -71,7 +79,7 @@
       <!-- Text -->
       <a-text value="Take me to Mackinac Island"
               align="center"
-              color="#a9b5d1"
+              color="#ffffff"
               width="5"
               position="0 0 0.02">
       </a-text>
@@ -113,13 +121,15 @@
     </a-entity>
   </a-scene>
 
+  <!-- HTML Overlay Home Button -->
+  <button id="homeOverlayButton">⬅ Home</button>
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       document.body.style.opacity = "1";
 
       const cameraRig = document.querySelector("#camera-rig");
       const nextButton = document.querySelector("#nextButton");
-      const homeButton = document.querySelector("#home-button");
 
       // Move the camera when "Take me to Mackinac Island" is clicked
       nextButton.addEventListener("click", function () {
@@ -132,8 +142,8 @@
         nextButton.setAttribute("visible", "false");
       });
 
-      // Go home when home button is clicked
-      homeButton.addEventListener("click", function () {
+      // Go home when home overlay button is clicked
+      document.querySelector("#homeOverlayButton").addEventListener("click", function () {
         window.location.href = "index.html";
       });
 
