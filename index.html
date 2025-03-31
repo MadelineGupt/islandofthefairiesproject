@@ -1,100 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Island of the Fairies</title>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-        }
-        a-scene {
-            width: 100vw;
-            height: 100vh;
-        }
-        /* Footer Styles */
-        #footer {
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-            font-size: 14px;
-            color: white;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 5px 0;
-        }
-    </style>
-</head>
-<body>
-    <a-scene>
-        <a-sky src="water-texture.jpg" rotation="0 270 0"></a-sky>
-        
-        <!-- VR-Compatible Title with Magical Font -->
-        <a-entity position="0 4 -4" text="value: Island of the Fairies; align: center; width: 14; color: white; font: mozillavr;"></a-entity>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mackinac Bridge VR</title>
+    <meta name="description" content="WebXR Mackinac Bridge Scene" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #87CEEB">
 
-        <!-- VR-Compatible Buttons -->
-        <a-entity id="buttonContainer" position="0 1.5 -3">
-            <!-- Instructions Button -->
-            <a-entity id="instructionsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
-                      material="color: white; opacity: 0.8"
-                      position="-2 0 0"
-                      text="value: Instructions; align: center; color: black; width: 3"
-                      class="clickable">
-            </a-entity>
+      <!-- Camera -->
+      <a-entity id="rig" position="0 1.6 0">
+        <a-entity camera look-controls wasd-controls></a-entity>
+      </a-entity>
 
-            <!-- Enter Button -->
-            <a-entity id="enterButton" geometry="primitive: plane; width: 1.2; height: 0.4"
-                      material="color: white; opacity: 0.8"
-                      position="0 0 0"
-                      text="value: Enter; align: center; color: black; width: 3"
-                      class="clickable">
-            </a-entity>
+      <!-- Bridge Floor -->
+      <a-box position="0 0 -5" depth="50" height="0.1" width="4" color="#555"></a-box>
 
-            <!-- Credits Button -->
-            <a-entity id="creditsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
-                      material="color: white; opacity: 0.8"
-                      position="2 0 0"
-                      text="value: Credits; align: center; color: black; width: 3"
-                      class="clickable">
-            </a-entity>
-        </a-entity>
-        
-        <!-- Camera with Updated Cursor -->
-        <a-camera position="0 1.6 0">
-            <a-cursor color="white" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;" material="color: white; shader: flat;" position="0 0 -1"></a-cursor>
-        </a-camera>
-    </a-scene>
+      <!-- Side Rails -->
+      <a-box position="-2 1 -5" depth="50" height="2" width="0.1" color="#333"></a-box>
+      <a-box position="2 1 -5" depth="50" height="2" width="0.1" color="#333"></a-box>
 
-    <div id="footer">
-        &copy; 2025 Island of the Fairies. All rights reserved.
-    </div>
+      <!-- Water -->
+      <a-plane rotation="-90 0 0" width="100" height="100" color="#1E90FF" position="0 -0.05 -5"></a-plane>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let instructionsButton = document.querySelector("#instructionsButton");
-            let enterButton = document.querySelector("#enterButton");
-            let creditsButton = document.querySelector("#creditsButton");
+      <!-- Left Panel: Credits -->
+      <a-plane 
+        position="-3 2 0" 
+        rotation="0 90 0" 
+        width="2" 
+        height="1" 
+        color="#ffffff" 
+        class="clickable"
+        id="credits-panel">
+        <a-text 
+          value="CREDITS" 
+          align="center" 
+          color="#000000" 
+          width="1.5" 
+          position="0 0 0.01">
+        </a-text>
+      </a-plane>
 
-            if (!instructionsButton || !enterButton || !creditsButton) {
-                console.error("Buttons not found in DOM.");
-                return;
-            }
+      <!-- Left Panel: Instructions -->
+      <a-plane 
+        position="-3 0.8 0" 
+        rotation="0 90 0" 
+        width="2" 
+        height="1" 
+        color="#ffffff" 
+        class="clickable"
+        id="instructions-panel">
+        <a-text 
+          value="INSTRUCTIONS" 
+          align="center" 
+          color="#000000" 
+          width="1.5" 
+          position="0 0 0.01">
+        </a-text>
+      </a-plane>
 
-            instructionsButton.addEventListener("click", function(event) {
-                window.location.href = "instructions.html";
+      <!-- Right Panel: Enter -->
+      <a-plane 
+        position="3 1.6 0" 
+        rotation="0 -90 0" 
+        width="2.5" 
+        height="1.5" 
+        color="#00CED1" 
+        class="clickable"
+        id="enter-panel">
+        <a-text 
+          value="ENTER →" 
+          align="center" 
+          color="#000000" 
+          width="2" 
+          position="0 0 0.01">
+        </a-text>
+      </a-plane>
+
+      <!-- Lighting -->
+      <a-entity light="type: ambient; intensity: 0.6"></a-entity>
+      <a-entity light="type: directional; intensity: 0.8" position="0 10 5"></a-entity>
+
+      <!-- Interaction Script -->
+      <script>
+        AFRAME.registerComponent('link-handler', {
+          schema: { url: { type: 'string' } },
+          init: function () {
+            this.el.addEventListener('click', () => {
+              window.location.href = this.data.url;
             });
-
-            enterButton.addEventListener("click", function(event) {
-                window.location.href = "map.html";
-            });
-
-            creditsButton.addEventListener("click", function(event) {
-                window.location.href = "credits.html";
-            });
+          }
         });
-    </script>
-</body>
+
+        document.addEventListener('DOMContentLoaded', () => {
+          document.querySelector('#enter-panel').setAttribute('link-handler', 'url: map.html');
+          document.querySelector('#credits-panel').setAttribute('link-handler', 'url: credits.html');
+          document.querySelector('#instructions-panel').setAttribute('link-handler', 'url: instructions.html');
+        });
+      </script>
+    </a-scene>
+  </body>
 </html>
