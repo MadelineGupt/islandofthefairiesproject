@@ -48,7 +48,7 @@
     </a-entity>
 
     <!-- Camera Rig -->
-    <a-entity id="camera-rig" position="0 8 10" movement-controls="constrainToNavMesh: true">
+    <a-entity id="camera-rig" movement-controls="constrainToNavMesh: true">
       <a-entity id="camera" camera position="0 1 0" look-controls>
         <a-cursor color="black"></a-cursor>
       </a-entity>
@@ -131,7 +131,19 @@
       const cameraRig = document.querySelector("#camera-rig");
       const nextButton = document.querySelector("#nextButton");
 
-      // Move the camera when "Take me to Mackinac Island" is clicked
+      // 🔍 Check if user is returning from a video
+      const urlParams = new URLSearchParams(window.location.search);
+      const shouldStartDescended = urlParams.get("descended") === "true";
+
+      if (shouldStartDescended) {
+        cameraRig.setAttribute("position", "5 0 -4");
+        nextButton.setAttribute("visible", "false");
+      } else {
+        cameraRig.setAttribute("position", "0 8 10");
+        nextButton.setAttribute("visible", "true");
+      }
+
+      // "Take me to Mackinac Island" button
       nextButton.addEventListener("click", function () {
         cameraRig.setAttribute("animation", {
           property: "position",
@@ -142,17 +154,17 @@
         nextButton.setAttribute("visible", "false");
       });
 
-      // Go home when home overlay button is clicked
-      document.querySelector("#homeOverlayButton").addEventListener("click", function () {
-        window.location.href = "index.html";
-      });
-
       // Orbs open videos
       for (let i = 1; i <= 15; i++) {
         document.querySelector(`#orb${i}`).addEventListener("click", function () {
           goToVideo(`https://storage.googleapis.com/islandofthefairies/video${i}.mov`);
         });
       }
+
+      // Go home
+      document.querySelector("#homeOverlayButton").addEventListener("click", function () {
+        window.location.href = "index.html";
+      });
     });
 
     function goToVideo(videoSrc) {
