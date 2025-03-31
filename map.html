@@ -34,19 +34,34 @@
       </a-entity>
     </a-entity>
 
-    <!-- Clickable Text Button -->
-    <a-entity id="nextButton" position="0 10 -3" class="clickable">
+    <!-- Styled Button: Take me to Mackinac Island -->
+    <a-entity id="nextButton" position="0 10 -3" class="clickable"
+              animation="property: position.y; from: 10; to: 10.2; dur: 1000; dir: alternate; loop: true; easing: easeInOutSine"
+              animation__hover="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; startEvents: mouseenter; dur: 200"
+              animation__leave="property: scale; to: 1 1 1; startEvents: mouseleave; dur: 200">
+
+      <!-- Background Plane -->
       <a-plane width="6" height="1.2"
-               color="#000000"
-               opacity="0.001"
+               color="#222222"
+               opacity="0.9"
                position="0 0 0"
                material="shader: flat; transparent: true">
       </a-plane>
+
+      <!-- Glowing Border Aura -->
+      <a-plane width="6.3" height="1.5"
+               color="#88ccee"
+               opacity="0.25"
+               position="0 0 -0.01"
+               material="shader: flat; transparent: true">
+      </a-plane>
+
+      <!-- Text -->
       <a-text value="Take me to Mackinac Island"
               align="center"
               color="#ffffff"
-              width="6"
-              position="0 0 0.01">
+              width="5"
+              position="0 0 0.02">
       </a-text>
     </a-entity>
 
@@ -63,24 +78,22 @@
     <a-entity id="orbs-container">
       <script>
         let orbPositions = [
-          [5.55, -6.25],
-          [5.5, -4.75],
-          [5.1, -5.25],
-          [5.75, -8],
-          [5.85, -5.25]
+          [5.55, -6.25], [5.5, -4.75], [5.1, -5.25], [5, -5], [5.5, -5.25],
+          [5.75, -8], [5.2, -5.5], [5.3, -6.35], [5.4, -6.3], [5.5, -5.7],
+          [4.8, -5.7], [4.9, -5.25], [5.1, -5.75], [4.2, -5.75], [5.85, -5.25]
         ];
 
         for (let i = 0; i < orbPositions.length; i++) {
           document.write(`
             <a-sphere id="orb${i + 1}"
                       position="${orbPositions[i][0]} 0.2 ${orbPositions[i][1]}"
-                      radius="0.15"
+                      radius="0.1"
                       color="#88ccee"
                       emissive="#88ccee"
-                      emissiveIntensity="0.7"
-                      opacity="0.9"
+                      emissiveIntensity="0.6"
+                      opacity="0.85"
                       class="clickable"
-                      animation="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; dir: alternate; dur: 1000; loop: true">
+                      animation="property: scale; from: 1 1 1; to: 1.08 1.08 1.08; dir: alternate; dur: 1200; loop: true">
             </a-sphere>
           `);
         }
@@ -95,7 +108,7 @@
       const cameraRig = document.querySelector("#camera-rig");
       const nextButton = document.querySelector("#nextButton");
 
-      // Move the camera down and forward when "Take me to Mackinac Island" is clicked
+      // Move the camera when "Take me to Mackinac Island" is clicked
       nextButton.addEventListener("click", function () {
         cameraRig.setAttribute("animation", {
           property: "position",
@@ -106,8 +119,8 @@
         nextButton.setAttribute("visible", "false");
       });
 
-      // Clickable orb interaction
-      for (let i = 1; i <= 5; i++) {
+      // Orbs open videos
+      for (let i = 1; i <= 15; i++) {
         document.querySelector(`#orb${i}`).addEventListener("click", function () {
           goToVideo(`https://storage.googleapis.com/islandofthefairies/video${i}.mov`);
         });
