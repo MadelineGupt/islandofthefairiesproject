@@ -31,6 +31,18 @@
     <a-entity id="camera-rig" position="0 8 10" movement-controls="constrainToNavMesh: true">
       <a-entity id="camera" camera position="0 1 0" look-controls>
         <a-cursor color="black"></a-cursor>
+
+        <!-- Floating Home Button in Camera View -->
+        <a-entity id="home-button"
+                  position="-1.2 -0.8 -2"
+                  geometry="primitive: plane; height: 0.3; width: 0.8"
+                  material="color: #222; opacity: 0.9; shader: flat"
+                  text="value: Home; align: center; color: #ffffff; width: 4"
+                  class="clickable"
+                  scale="0.5 0.5 0.5"
+                  animation__hover="property: scale; from: 0.5 0.5 0.5; to: 0.6 0.6 0.6; startEvents: mouseenter; dur: 200"
+                  animation__leave="property: scale; to: 0.5 0.5 0.5; startEvents: mouseleave; dur: 200">
+        </a-entity>
       </a-entity>
     </a-entity>
 
@@ -107,6 +119,7 @@
 
       const cameraRig = document.querySelector("#camera-rig");
       const nextButton = document.querySelector("#nextButton");
+      const homeButton = document.querySelector("#home-button");
 
       // Move the camera when "Take me to Mackinac Island" is clicked
       nextButton.addEventListener("click", function () {
@@ -117,6 +130,11 @@
           easing: "easeOutQuad"
         });
         nextButton.setAttribute("visible", "false");
+      });
+
+      // Go home when home button is clicked
+      homeButton.addEventListener("click", function () {
+        window.location.href = "index.html";
       });
 
       // Orbs open videos
