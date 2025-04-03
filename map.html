@@ -53,7 +53,7 @@
       </a-entity>
     </a-entity>
 
-    <!-- Take Me Button -->
+    <!-- Styled Button: Take me to Mackinac Island -->
     <a-entity id="nextButton" position="0 10 -3" class="clickable"
               animation="property: position.y; from: 10; to: 10.2; dur: 1000; dir: alternate; loop: true; easing: easeInOutSine"
               animation__hover="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; startEvents: mouseenter; dur: 200"
@@ -62,17 +62,20 @@
                color="#607d99"
                opacity="0.9"
                position="0 0 0"
-               material="shader: flat; transparent: true"></a-plane>
+               material="shader: flat; transparent: true">
+      </a-plane>
       <a-plane width="6.3" height="1.5"
                color="#88ccee"
                opacity="0.25"
                position="0 0 -0.01"
-               material="shader: flat; transparent: true"></a-plane>
+               material="shader: flat; transparent: true">
+      </a-plane>
       <a-text value="Take me to Mackinac Island"
               align="center"
               color="#ffffff"
               width="5"
-              position="0 0 0.02"></a-text>
+              position="0 0 0.02">
+      </a-text>
     </a-entity>
 
     <!-- Map -->
@@ -81,12 +84,43 @@
              rotation="-90 0 0"
              width="30" height="24"
              material="shader: standard; metalness: 0.1; roughness: 0.8;"
-             animation="property: position.y; from: 0.1; to: 0.2; dur: 3000; dir: alternate; loop: true; easing: easeInOutSine;"></a-image>
+             animation="property: position.y; from: 0.1; to: 0.2; dur: 3000; dir: alternate; loop: true; easing: easeInOutSine;">
+    </a-image>
 
-    <!-- Flower container -->
-    <a-entity id="flowers-container"></a-entity>
+    <!-- Flowers -->
+    <a-entity id="flowers-container">
+      <script>
+        let orbPositions = [
+          [5.55, -6.25], [5.5, -4.75], [5.1, -5.25], [5, -5], [5.5, -5.25],
+          [5.75, -8], [5.2, -5.5], [5.3, -6.35], [5.4, -6.3], [5.5, -5.7],
+          [4.8, -5.7], [4.9, -5.25], [5.1, -5.75], [4.2, -5.75], [5.85, -5.25]
+        ];
+
+        let flowerColors = ["#ee888d", "#d72a2a", "#fca311", "#ff66cc", "#9c27b0", "#2196f3", "#4caf50"];
+
+        for (let i = 0; i < orbPositions.length; i++) {
+          let color = flowerColors[i % flowerColors.length];
+          document.write(`
+            <a-entity id="flower${i + 1}" position="${orbPositions[i][0]} 0 ${orbPositions[i][1]}" scale="0.01 0.01 0.01" class="clickable">
+              <a-cylinder 
+                position="0 0.15 0" 
+                radius="0.02" 
+                height="0.3" 
+                color="#3b7d3b">
+              </a-cylinder>
+              <a-sphere position="0 0.35 0.05" radius="0.05" color="${color}"></a-sphere>
+              <a-sphere position="0 0.35 -0.05" radius="0.05" color="${color}"></a-sphere>
+              <a-sphere position="0.05 0.35 0" radius="0.05" color="${color}"></a-sphere>
+              <a-sphere position="-0.05 0.35 0" radius="0.05" color="${color}"></a-sphere>
+              <a-sphere position="0 0.35 0" radius="0.025" color="#ffd700"></a-sphere>
+            </a-entity>
+          `);
+        }
+      </script>
+    </a-entity>
   </a-scene>
 
+  <!-- HTML Overlay Home Button -->
   <button id="homeOverlayButton">⬅ Home</button>
 
   <script>
@@ -96,6 +130,7 @@
       const cameraRig = document.querySelector("#camera-rig");
       const nextButton = document.querySelector("#nextButton");
 
+      // Check if user is returning from a video
       const urlParams = new URLSearchParams(window.location.search);
       const shouldStartDescended = urlParams.get("descended") === "true";
 
@@ -107,6 +142,7 @@
         nextButton.setAttribute("visible", "true");
       }
 
+      // "Take me to Mackinac Island" button
       nextButton.addEventListener("click", function () {
         cameraRig.setAttribute("animation", {
           property: "position",
@@ -117,97 +153,55 @@
         nextButton.setAttribute("visible", "false");
       });
 
-      const positions = [
-        [5.55, -6.25], [5.5, -4.75], [5.1, -5.25], [5, -5], [5.5, -5.25],
-        [5.75, -8], [5.2, -5.5], [5.3, -6.35], [5.4, -6.3], [5.5, -5.7],
-        [4.8, -5.7], [4.9, -5.25], [5.1, -5.75], [4.2, -5.75], [5.85, -5.25]
-      ];
-      const colors = ["#ee888d", "#d72a2a", "#fca311", "#ff66cc", "#9c27b0", "#2196f3", "#4caf50"];
-      const container = document.querySelector("#flowers-container");
+      // Make flowers bloom on click + open video
+      for (let i = 1; i <= 15; i++) {
+        const flower = document.querySelector(`#flower${i}`);
+        flower.addEventListener("click", function () {
+          flower.setAttribute("animation__bloom", {
+            property: "scale",
+            to: "1 1 1",
+            dur: 800,
+            easing: "easeOutElastic"
+          });
 
-      positions.forEach((pos, i) => {
-        const id = `flower${i + 1}`;
-        const seen = localStorage.getItem(id) === "true";
-        const color = colors[i % colors.length];
-
-        const flower = document.createElement("a-entity");
-        flower.setAttribute("id", id);
-        flower.setAttribute("position", `${pos[0]} 0 ${pos[1]}`);
-        flower.setAttribute("class", "clickable");
-        flower.setAttribute("scale", seen ? "1 1 1" : "0.01 0.01 0.01");
-
-        // Stem
-        const stem = document.createElement("a-cylinder");
-        stem.setAttribute("position", "0 0.15 0");
-        stem.setAttribute("radius", "0.02");
-        stem.setAttribute("height", "0.3");
-        stem.setAttribute("color", "#3b7d3b");
-        flower.appendChild(stem);
-
-        // Petals
-        ["0.05 0.35 0", "-0.05 0.35 0", "0 0.35 0.05", "0 0.35 -0.05"].forEach(p => {
-          const petal = document.createElement("a-sphere");
-          petal.setAttribute("position", p);
-          petal.setAttribute("radius", "0.05");
-          petal.setAttribute("color", color);
-          flower.appendChild(petal);
+          // delay video open for 900ms so bloom completes
+          setTimeout(() => {
+            goToVideo(`https://storage.googleapis.com/islandofthefairies/video${i}.mov`);
+          }, 900);
         });
+      }
 
-        // Center
-        const center = document.createElement("a-sphere");
-        center.setAttribute("position", "0 0.35 0");
-        center.setAttribute("radius", "0.025");
-        center.setAttribute("color", "#ffd700");
-        flower.appendChild(center);
-
-        flower.addEventListener("click", () => {
-          if (!seen) {
-            flower.setAttribute("animation__bloom", {
-              property: "scale",
-              to: "1 1 1",
-              dur: 800,
-              easing: "easeOutElastic"
-            });
-            localStorage.setItem(id, "true");
-            setTimeout(() => {
-              goToVideo(`https://storage.googleapis.com/islandofthefairies/video${i + 1}.mov`);
-            }, 900);
-          } else {
-            goToVideo(`https://storage.googleapis.com/islandofthefairies/video${i + 1}.mov`);
-          }
-        });
-
-        container.appendChild(flower);
-      });
-
+      // Go home
       document.querySelector("#homeOverlayButton").addEventListener("click", function () {
         window.location.href = "index.html";
       });
-
-      AFRAME.registerComponent("paddle-movement", {
-        init: function () {
-          const rig = document.querySelector("#camera-rig");
-          window.addEventListener("keydown", function (event) {
-            if (event.key === "w" || event.key === "s") {
-              let direction = event.key === "w" ? -1 : 1;
-              let currentPosition = rig.getAttribute("position");
-              rig.setAttribute("animation", {
-                property: "position.z",
-                to: currentPosition.z + direction * 2,
-                dur: 1500,
-                easing: "easeOutQuad"
-              });
-            }
-          });
-        }
-      });
-
-      document.querySelector("#camera-rig").setAttribute("paddle-movement", "");
     });
 
     function goToVideo(videoSrc) {
       window.location.href = "video.html?video=" + encodeURIComponent(videoSrc);
     }
+
+    // Paddle Movement
+    AFRAME.registerComponent("paddle-movement", {
+      init: function () {
+        const rig = document.querySelector("#camera-rig");
+
+        window.addEventListener("keydown", function (event) {
+          if (event.key === "w" || event.key === "s") {
+            let direction = event.key === "w" ? -1 : 1;
+            let currentPosition = rig.getAttribute("position");
+            rig.setAttribute("animation", {
+              property: "position.z",
+              to: currentPosition.z + direction * 2,
+              dur: 1500,
+              easing: "easeOutQuad"
+            });
+          }
+        });
+      }
+    });
+
+    document.querySelector("#camera-rig").setAttribute("paddle-movement", "");
   </script>
 </body>
 </html>
