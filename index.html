@@ -1,171 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Island of the Fairies</title>
-  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-    }
-
-    a-scene {
-      width: 100vw;
-      height: 100vh;
-    }
-
-    #footer {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      font-size: 14px;
-      color: white;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 5px 0;
-      z-index: 3;
-    }
-
-    /* 🌊 Built-in Animated Splashing Waves */
-    .wave-container {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100vw;
-      height: 200px;
-      overflow: hidden;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .wave {
-      position: absolute;
-      bottom: 0;
-      width: 200%;
-      height: 100%;
-      background: rgba(61, 125, 146, 0.4);
-      border-radius: 100% 50%;
-      opacity: 0.6;
-      animation: wave-animation 6s infinite linear;
-    }
-
-    .wave1 {
-      animation-delay: 0s;
-    }
-
-    .wave2 {
-      animation-delay: 2s;
-      background: rgba(61, 125, 146, 0.3);
-    }
-
-    .wave3 {
-      animation-delay: 4s;
-      background: rgba(61, 125, 146, 0.2);
-    }
-
-    @keyframes wave-animation {
-      0% { transform: translateX(0) translateY(0); }
-      50% { transform: translateX(-25%) translateY(10px); }
-      100% { transform: translateX(-50%) translateY(0); }
-    }
-
-    /* 💦 Splash Effect on Button Click */
-    .splash-effect {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(ellipse at center, rgba(61,125,146,0.5) 0%, transparent 70%);
-      animation: splash 1s ease forwards;
-      z-index: 999;
-      pointer-events: none;
-    }
-
-    @keyframes splash {
-      0% { opacity: 0; transform: scale(0); }
-      100% { opacity: 1; transform: scale(3); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Island of the Fairies</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        a-scene {
+            width: 100vw;
+            height: 100vh;
+        }
+        /* Footer Styles */
+        #footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 0;
+        }
+    </style>
 </head>
 <body>
+    <a-scene>
+        <a-sky src="water-texture.jpg" color="#3d7d92" rotation="0 270 0"></a-sky>
+        
+        <!-- VR-Compatible Title with Magical Font -->
+        <a-entity position="0 4 -4" text="value: Island of the Fairies; align: center; width: 14; color: white; font: mozillavr;"></a-entity>
 
-  <!-- 🌊 Built-in Animated Wave Overlay -->
-  <div class="wave-container">
-    <div class="wave wave1"></div>
-    <div class="wave wave2"></div>
-    <div class="wave wave3"></div>
-  </div>
+        <!-- VR-Compatible Buttons -->
+        <a-entity id="buttonContainer" position="0 1.5 -3">
+            <!-- Instructions Button -->
+            <a-entity id="instructionsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
+                      material="color: white; opacity: 0.8"
+                      position="-2 0 0"
+                      text="value: Instructions; align: center; color: black; width: 3"
+                      class="clickable">
+            </a-entity>
 
-  <a-scene>
-    <a-sky src="water-texture.jpg" color="#3d7d92" rotation="0 270 0"></a-sky>
+            <!-- Enter Button -->
+            <a-entity id="enterButton" geometry="primitive: plane; width: 1.2; height: 0.4"
+                      material="color: white; opacity: 0.8"
+                      position="0 0 0"
+                      text="value: Enter; align: center; color: black; width: 3"
+                      class="clickable">
+            </a-entity>
 
-    <a-entity position="0 4 -4" text="value: Island of the Fairies; align: center; width: 14; color: white; font: mozillavr;"></a-entity>
+            <!-- Credits Button -->
+            <a-entity id="creditsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
+                      material="color: white; opacity: 0.8"
+                      position="2 0 0"
+                      text="value: Credits; align: center; color: black; width: 3"
+                      class="clickable">
+            </a-entity>
+        </a-entity>
+        
+        <!-- Camera with Updated Cursor -->
+        <a-camera position="0 1.6 0">
+            <a-cursor color="white" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;" material="color: white; shader: flat;" position="0 0 -1"></a-cursor>
+        </a-camera>
+    </a-scene>
 
-    <a-entity id="buttonContainer" position="0 1.5 -3">
-      <a-entity id="instructionsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
-                material="color: white; opacity: 0.8"
-                position="-2 0 0"
-                text="value: Instructions; align: center; color: black; width: 3"
-                class="clickable">
-      </a-entity>
+    <div id="footer">
+        &copy; 2025 Island of the Fairies. All rights reserved.
+    </div>
 
-      <a-entity id="enterButton" geometry="primitive: plane; width: 1.2; height: 0.4"
-                material="color: white; opacity: 0.8"
-                position="0 0 0"
-                text="value: Enter; align: center; color: black; width: 3"
-                class="clickable">
-      </a-entity>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let instructionsButton = document.querySelector("#instructionsButton");
+            let enterButton = document.querySelector("#enterButton");
+            let creditsButton = document.querySelector("#creditsButton");
 
-      <a-entity id="creditsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
-                material="color: white; opacity: 0.8"
-                position="2 0 0"
-                text="value: Credits; align: center; color: black; width: 3"
-                class="clickable">
-      </a-entity>
-    </a-entity>
+            if (!instructionsButton || !enterButton || !creditsButton) {
+                console.error("Buttons not found in DOM.");
+                return;
+            }
 
-    <a-camera position="0 1.6 0">
-      <a-cursor color="white" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;"
-                material="color: white; shader: flat;" position="0 0 -1"></a-cursor>
-    </a-camera>
-  </a-scene>
+            instructionsButton.addEventListener("click", function(event) {
+                window.location.href = "instructions.html";
+            });
 
-  <div id="footer">
-    &copy; 2025 Island of the Fairies. All rights reserved.
-  </div>
+            enterButton.addEventListener("click", function(event) {
+                window.location.href = "map.html";
+            });
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      let instructionsButton = document.querySelector("#instructionsButton");
-      let enterButton = document.querySelector("#enterButton");
-      let creditsButton = document.querySelector("#creditsButton");
-
-      if (!instructionsButton || !enterButton || !creditsButton) {
-        console.error("Buttons not found in DOM.");
-        return;
-      }
-
-      instructionsButton.addEventListener("click", function () {
-        window.location.href = "instructions.html";
-      });
-
-      enterButton.addEventListener("click", function () {
-        const splash = document.createElement("div");
-        splash.className = "splash-effect";
-        document.body.appendChild(splash);
-        setTimeout(() => {
-          window.location.href = "map.html";
-        }, 1000);
-      });
-
-      creditsButton.addEventListener("click", function () {
-        window.location.href = "credits.html";
-      });
-    });
-  </script>
+            creditsButton.addEventListener("click", function(event) {
+                window.location.href = "credits.html";
+            });
+        });
+    </script>
 </body>
 </html>
