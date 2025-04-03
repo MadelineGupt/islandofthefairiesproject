@@ -29,25 +29,47 @@
       z-index: 3;
     }
 
-    /* 🌊 Wave Animation Overlay */
-    .wave {
+    /* 🌊 Built-in Animated Splashing Waves */
+    .wave-container {
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 200%;
+      width: 100vw;
       height: 200px;
-      background: url('https://svgshare.com/i/uEe.svg') repeat-x;
-      background-size: contain;
-      animation: wave 4s ease-in-out infinite;
-      pointer-events: none;
-      opacity: 0.6;
+      overflow: hidden;
       z-index: 2;
+      pointer-events: none;
     }
 
-    @keyframes wave {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(-25%); }
-      100% { transform: translateX(0); }
+    .wave {
+      position: absolute;
+      bottom: 0;
+      width: 200%;
+      height: 100%;
+      background: rgba(61, 125, 146, 0.4);
+      border-radius: 100% 50%;
+      opacity: 0.6;
+      animation: wave-animation 6s infinite linear;
+    }
+
+    .wave1 {
+      animation-delay: 0s;
+    }
+
+    .wave2 {
+      animation-delay: 2s;
+      background: rgba(61, 125, 146, 0.3);
+    }
+
+    .wave3 {
+      animation-delay: 4s;
+      background: rgba(61, 125, 146, 0.2);
+    }
+
+    @keyframes wave-animation {
+      0% { transform: translateX(0) translateY(0); }
+      50% { transform: translateX(-25%) translateY(10px); }
+      100% { transform: translateX(-50%) translateY(0); }
     }
 
     /* 💦 Splash Effect on Button Click */
@@ -70,8 +92,13 @@
   </style>
 </head>
 <body>
-  <!-- 🌊 Wave Overlay -->
-  <div class="wave"></div>
+
+  <!-- 🌊 Built-in Animated Wave Overlay -->
+  <div class="wave-container">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+  </div>
 
   <a-scene>
     <a-sky src="water-texture.jpg" color="#3d7d92" rotation="0 270 0"></a-sky>
