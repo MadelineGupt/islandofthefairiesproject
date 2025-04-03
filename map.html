@@ -37,6 +37,7 @@
   <a-scene>
     <a-entity environment="preset: contact; skyType: atmosphere; ground: none; dressing: none; horizonColor: #88ccee"></a-entity>
 
+    <!-- Water -->
     <a-entity id="water"
               geometry="primitive: plane; width: 300; height: 300"
               rotation="-90 0 0"
@@ -44,12 +45,14 @@
               material="color: #3d7d92; src: water-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.3; opacity: 0.85;">
     </a-entity>
 
+    <!-- Camera Rig -->
     <a-entity id="camera-rig" movement-controls="constrainToNavMesh: true">
       <a-entity id="camera" camera position="0 1 0" look-controls>
         <a-cursor color="black"></a-cursor>
       </a-entity>
     </a-entity>
 
+    <!-- Take me button -->
     <a-entity id="nextButton" position="0 10 -3" class="clickable"
               animation="property: position.y; from: 10; to: 10.2; dur: 1000; dir: alternate; loop: true; easing: easeInOutSine"
               animation__hover="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; startEvents: mouseenter; dur: 200"
@@ -59,11 +62,24 @@
       <a-text value="Take me to Mackinac Island" align="center" color="#ffffff" width="5" position="0 0 0.02"></a-text>
     </a-entity>
 
+    <!-- Map -->
     <a-image id="map" src="map.png" position="0 0.1 -3" rotation="-90 0 0" width="30" height="24"
              material="shader: standard; metalness: 0.1; roughness: 0.8;"
              animation="property: position.y; from: 0.1; to: 0.2; dur: 3000; dir: alternate; loop: true; easing: easeInOutSine;">
     </a-image>
 
+    <!-- Instructional Text -->
+    <a-entity position="5.2 1.3 -5.5"
+              animation="property: position.y; dir: alternate; dur: 3000; easing: easeInOutSine; loop: true; to: 1.4">
+      <a-text value="Click each flower to see a video in that location"
+              align="center"
+              color="#ffffff"
+              width="8"
+              position="0 0 0.02">
+      </a-text>
+    </a-entity>
+
+    <!-- Flowers -->
     <a-entity id="orbs-container">
       <script>
         const orbPositions = [
@@ -95,6 +111,7 @@
     </a-entity>
   </a-scene>
 
+  <!-- HTML Button -->
   <button id="homeOverlayButton">⬅ Home</button>
 
   <script>
@@ -143,7 +160,6 @@
     AFRAME.registerComponent("paddle-movement", {
       init: function () {
         const rig = document.querySelector("#camera-rig");
-
         window.addEventListener("keydown", function (event) {
           if (event.key === "w" || event.key === "s") {
             let direction = event.key === "w" ? -1 : 1;
