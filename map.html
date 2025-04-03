@@ -68,18 +68,18 @@
              animation="property: position.y; from: 0.1; to: 0.2; dur: 3000; dir: alternate; loop: true; easing: easeInOutSine;">
     </a-image>
 
-    <!-- Instructional Text -->
     <a-entity position="5.2 5 5"
               animation="property: position.y; dir: alternate; dur: 3000; easing: easeInOutSine; loop: true; to: 2.15">
-      <a-text value="Click each flower to see a video in that location"
-              align="center"
-              color="#ffffff"
-              width="3"
-              side="double"
-              position="5.2 .05 -7"
-              scale="1.5 1.5 1.5">
-      </a-text>
+      <a-entity troika-text="value: Click each flower to see a video in that location;
+                             font: https://fonts.gstatic.com/s/pirataone/v21/I_urMpiDvgLdLh0fAtofhiGOrzSk.woff;
+                             align: center;
+                             color: #ffffff;
+                             fontSize: 0.5"
+                position="5.2 0.05 -7"
+                scale="1.5 1.5 1.5">
     </a-entity>
+  </a-entity>
+
 
     <!-- Flowers -->
     <a-entity id="orbs-container">
