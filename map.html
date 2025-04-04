@@ -45,8 +45,8 @@
               material="color: #3d7d92; src: water-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.3; opacity: 0.85;">
     </a-entity>
 
-    <!-- Camera Rig -->
-    <a-entity id="camera-rig">
+    <!-- Camera Rig with VR controller support -->
+    <a-entity id="camera-rig" universal-controls gamepad-controls="movementEnabled: true">
       <a-entity id="cameraWrapper"></a-entity>
     </a-entity>
 
