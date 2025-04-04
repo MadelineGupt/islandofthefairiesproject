@@ -45,8 +45,10 @@
               material="color: #3d7d92; src: water-texture.jpg; shader: standard; metalness: 0.2; roughness: 0.3; opacity: 0.85;">
     </a-entity>
 
-    <!-- Camera Rig with VR controller support -->
-    <a-entity id="camera-rig" universal-controls gamepad-controls="movementEnabled: true">
+    <!-- Camera Rig with full controller support -->
+    <a-entity id="camera-rig" 
+              universal-controls 
+              gamepad-controls="controller: 0,1; movementEnabled: true; rotateAxis: y; moveAxis: z; rotationSensitivity: 1; acceleration: 25;">
       <a-entity id="cameraWrapper"></a-entity>
     </a-entity>
 
@@ -203,26 +205,6 @@
     function goToVideo(videoSrc) {
       window.location.href = "video.html?video=" + encodeURIComponent(videoSrc);
     }
-
-    AFRAME.registerComponent("paddle-movement", {
-      init: function () {
-        const rig = document.querySelector("#camera-rig");
-        window.addEventListener("keydown", function (event) {
-          if (event.key === "w" || event.key === "s") {
-            let direction = event.key === "w" ? -1 : 1;
-            let currentPosition = rig.getAttribute("position");
-            rig.setAttribute("animation", {
-              property: "position.z",
-              to: currentPosition.z + direction * 2,
-              dur: 1500,
-              easing: "easeOutQuad"
-            });
-          }
-        });
-      }
-    });
-
-    document.querySelector("#camera-rig").setAttribute("paddle-movement", "");
   </script>
 </body>
 </html>
