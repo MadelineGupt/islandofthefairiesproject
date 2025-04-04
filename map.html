@@ -47,15 +47,7 @@
 
     <!-- Camera Rig -->
     <a-entity id="camera-rig">
-      <a-entity id="camera" camera position="0 1 0" look-controls>
-        <a-cursor 
-          fuse="true" 
-          fuse-timeout="1000" 
-          color="black"
-          geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
-          material="shader: flat">
-        </a-cursor>
-      </a-entity>
+      <a-entity id="cameraWrapper"></a-entity>
     </a-entity>
 
     <!-- Take me button -->
@@ -135,8 +127,39 @@
   <button id="homeOverlayButton">⬅ Home</button>
 
   <script>
+    function isMobile() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
       document.body.style.opacity = "1";
+
+      // Insert correct camera + cursor
+      const cameraWrapper = document.querySelector("#cameraWrapper");
+
+      if (isMobile()) {
+        cameraWrapper.innerHTML = `
+          <a-entity id="camera" camera position="0 1 0" look-controls>
+            <a-cursor 
+              fuse="true" 
+              fuse-timeout="1000" 
+              color="black"
+              geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+              material="shader: flat">
+            </a-cursor>
+          </a-entity>
+        `;
+      } else {
+        cameraWrapper.innerHTML = `
+          <a-entity id="camera" camera position="0 1 0" look-controls wasd-controls>
+            <a-cursor 
+              color="black"
+              geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+              material="shader: flat">
+            </a-cursor>
+          </a-entity>
+        `;
+      }
 
       const cameraRig = document.querySelector("#camera-rig");
       const nextButton = document.querySelector("#nextButton");
