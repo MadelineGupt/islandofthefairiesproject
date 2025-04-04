@@ -1,121 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credits</title>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Credits</title>
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-    <a-scene>
+  <a-scene>
 
-        <!-- Sky Background -->
-        <a-sky src="water-texture.jpg" color="#3d7d92" rotation="0 270 0"></a-sky>
+    <!-- Sky Background -->
+    <a-sky src="water-texture.jpg" color="#3d7d92" rotation="0 270 0"></a-sky>
 
-        <!-- Camera & Cursor -->
-        <a-camera position="0 1.6 0">
-            <a-cursor color="white" 
-                      geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;" 
-                      material="color: white; shader: flat;" 
-                      position="0 0 -1">
-            </a-cursor>
-        </a-camera>
+    <!-- Camera & Cursor -->
+    <a-camera position="0 1.6 0">
+      <a-cursor color="white"
+                geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;"
+                material="color: white; shader: flat;"
+                position="0 0 -1">
+      </a-cursor>
+    </a-camera>
 
-        <!-- Scrolling Credits -->
-        <a-entity id="creditRoll" position="0 0 -3" 
-                  animation="property: position; to: 0 15 -3; dur: 60000; easing: linear">
+    <!-- Scrolling Credits -->
+    <a-entity id="creditRoll" position="0 0 -3"
+              animation="property: position; to: 0 15 -3; dur: 60000; easing: linear">
 
-            <!-- Title -->
-            <a-text value="CREDITS" align="center" color="white" width="4" position="0 0 0"></a-text>
+      <!-- Title -->
+      <a-text value="CREDITS" align="center" color="white" width="4" position="0 0 0"></a-text>
 
-            <!-- Final credits moved to top -->
-            <a-text value="Map Design" align="center" color="white" width="3" position="0 -0.7 0"></a-text>
-            <a-text value="• Caitlyn Newago" align="center" color="white" width="2.5" position="0 -1.0 0"></a-text>
+      <!-- Final credits first -->
+      <a-text value="Map Design" align="center" color="white" width="3" position="0 -0.7 0"></a-text>
+      <a-text value="• Caitlyn Newago" align="center" color="white" width="2.5" position="0 -1.0 0"></a-text>
 
-            <a-text value="Special Thanks" align="center" color="white" width="3" position="0 -1.7 0"></a-text>
-            <a-text value="• XR Peds Lab at Yale University" align="center" color="white" width="2.5" position="0 -2.0 0"></a-text>
-            <a-text value="• The Aspen Institute" align="center" color="white" width="2.5" position="0 -2.3 0"></a-text>
+      <a-text value="Special Thanks" align="center" color="white" width="3" position="0 -1.7 0"></a-text>
+      <a-text value="• XR Peds Lab at Yale University" align="center" color="white" width="2.5" position="0 -2.0 0"></a-text>
+      <a-text value="• The Aspen Institute" align="center" color="white" width="2.5" position="0 -2.3 0"></a-text>
 
-            <a-text value="Filming and Technical Development" align="center" color="white" width="3" position="0 -3.0 0"></a-text>
-            <a-text value="• Madeline Gupta" align="center" color="white" width="2.5" position="0 -3.3 0"></a-text>
+      <a-text value="Production" align="center" color="white" width="3" position="0 -3.0 0"></a-text>
+      <a-text value="• Madeline Gupta" align="center" color="white" width="2.5" position="0 -3.3 0"></a-text>
 
-            <!-- Video credits -->
-            <a-text value="Bridge Video" align="center" color="white" width="3" position="0 -4.0 0"></a-text>
-            <a-text value="• Audio: Madeline Gupta" align="center" color="white" width="2.5" position="0 -4.3 0"></a-text>
+      <!-- Video/audio credits -->
+      <a-text value="Bridge Video" align="center" color="white" width="3" position="0 -4.0 0"></a-text>
+      <a-text value="• Audio: Madeline Gupta" align="center" color="white" width="2.5" position="0 -4.3 0"></a-text>
 
-            <a-text value="Arch Rock Video" align="center" color="white" width="3" position="0 -5.0 0"></a-text>
-            <a-text value="• Audio: Madeline Gupta" align="center" color="white" width="2.5" position="0 -5.3 0"></a-text>
+      <a-text value="Arch Rock Video" align="center" color="white" width="3" position="0 -5.0 0"></a-text>
+      <a-text value="• Audio: Madeline Gupta" align="center" color="white" width="2.5" position="0 -5.3 0"></a-text>
 
-            <a-text value="Butterfly Garden Video" align="center" color="white" width="3" position="0 -6.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -6.3 0"></a-text>
+      <a-text value="Butterfly Garden Video" align="center" color="white" width="3" position="0 -6.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -6.3 0"></a-text>
 
-            <a-text value="Forest Walk Video" align="center" color="white" width="3" position="0 -7.0 0"></a-text>
-            <a-text value="• Audio: Jane Schoolcraft, Madeline Gupta" align="center" color="white" width="2.5" position="0 -7.3 0"></a-text>
+      <a-text value="Forest Walk Video" align="center" color="white" width="3" position="0 -7.0 0"></a-text>
+      <a-text value="• Audio: Jane Schoolcraft, Madeline Gupta" align="center" color="white" width="2.5" position="0 -7.3 0"></a-text>
 
-            <a-text value="View from Coast Video" align="center" color="white" width="3" position="0 -8.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -8.3 0"></a-text>
+      <a-text value="View from Coast Video" align="center" color="white" width="3" position="0 -8.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -8.3 0"></a-text>
 
-            <a-text value="Ice Caps Video" align="center" color="white" width="3" position="0 -9.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -9.3 0"></a-text>
+      <a-text value="Ice Caps Video" align="center" color="white" width="3" position="0 -9.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -9.3 0"></a-text>
 
-            <a-text value="Tan Sand Video" align="center" color="white" width="3" position="0 -10.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -10.3 0"></a-text>
+      <a-text value="Tan Sand Video" align="center" color="white" width="3" position="0 -10.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -10.3 0"></a-text>
 
-            <a-text value="Blue Ocean" align="center" color="white" width="3" position="0 -11.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -11.3 0"></a-text>
+      <a-text value="Blue Ocean" align="center" color="white" width="3" position="0 -11.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -11.3 0"></a-text>
 
-            <a-text value="Rocks on Beach Video" align="center" color="white" width="3" position="0 -12.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -12.3 0"></a-text>
+      <a-text value="Rocks on Beach Video" align="center" color="white" width="3" position="0 -12.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -12.3 0"></a-text>
 
-            <a-text value="Soo Locks in Fog Video" align="center" color="white" width="3" position="0 -13.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -13.3 0"></a-text>
+      <a-text value="Soo Locks in Fog Video" align="center" color="white" width="3" position="0 -13.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -13.3 0"></a-text>
 
-            <a-text value="Birds on Beach Video" align="center" color="white" width="3" position="0 -14.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -14.3 0"></a-text>
+      <a-text value="Birds on Beach Video" align="center" color="white" width="3" position="0 -14.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -14.3 0"></a-text>
 
-            <a-text value="Sitting on the Shore Video" align="center" color="white" width="3" position="0 -15.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -15.3 0"></a-text>
+      <a-text value="Sitting on the Shore Video" align="center" color="white" width="3" position="0 -15.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -15.3 0"></a-text>
 
-            <a-text value="Dreamcatcher Video" align="center" color="white" width="3" position="0 -16.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -16.3 0"></a-text>
+      <a-text value="Dreamcatcher Video" align="center" color="white" width="3" position="0 -16.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -16.3 0"></a-text>
 
-            <a-text value="Horses Video" align="center" color="white" width="3" position="0 -17.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -17.3 0"></a-text>
+      <a-text value="Horses Video" align="center" color="white" width="3" position="0 -17.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -17.3 0"></a-text>
 
-            <a-text value="Sailboat Video" align="center" color="white" width="3" position="0 -18.0 0"></a-text>
-            <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -18.3 0"></a-text>
+      <a-text value="Sailboat Video" align="center" color="white" width="3" position="0 -18.0 0"></a-text>
+      <a-text value="• Audio: Ojibwe.net" align="center" color="white" width="2.5" position="0 -18.3 0"></a-text>
 
-        </a-entity>
+    </a-entity>
 
-        <!-- VR-Compatible Back Button -->
-        <a-entity id="backButton" 
-                  geometry="primitive: plane; width: 1; height: 0.4" 
-                  material="color: white; opacity: 0.8"
-                  position="0 0.5 -2.5"
-                  text="value: Back; align: center; color: black; width: 2"
-                  class="clickable">
-        </a-entity>
+    <!-- Stylish VR-Compatible Back Button (lower-right corner) -->
+    <a-entity id="backButton"
+              geometry="primitive: plane; width: 0.8; height: 0.3"
+              material="color: white; opacity: 0.1"
+              position="1.2 0.3 -2"
+              text="value: Back; align: center; color: black; width: 2"
+              class="clickable"
+              event-set__mouseenter="material.opacity: 0.6"
+              event-set__mouseleave="material.opacity: 0.1">
+    </a-entity>
 
-    </a-scene>
+  </a-scene>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let backButton = document.querySelector("#backButton");
-            if (backButton) {
-                backButton.addEventListener("click", function () {
-                    window.location.href = "index.html";
-                });
-            }
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let backButton = document.querySelector("#backButton");
+      if (backButton) {
+        backButton.addEventListener("click", function () {
+          window.location.href = "index.html";
         });
-    </script>
+      }
+    });
+  </script>
 </body>
 </html>
