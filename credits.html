@@ -22,6 +22,9 @@
     <!-- Sky Background -->
     <a-sky src="water-texture.jpg" color="#3d7d92" rotation="0 270 0"></a-sky>
 
+    <!-- Ambient Ocean Sound -->
+    <a-sound id="oceanSound" src="url(ocean.wav)" loop="true" volume="0.5" position="0 2 0"></a-sound>
+
     <!-- Camera & Cursor -->
     <a-camera position="0 1.6 0">
       <a-cursor color="white"
@@ -38,7 +41,7 @@
       <!-- Title -->
       <a-text value="CREDITS" align="center" color="white" width="4" position="0 0 0"></a-text>
 
-      <!-- Final credits first -->
+      <!-- Individual Credits -->
       <a-text value="Creator and Filmer" align="center" color="white" width="3" position="0 -0.7 0"></a-text>
       <a-text value="• Madeline Gupta" align="center" color="white" width="2.5" position="0 -1.0 0"></a-text>
 
@@ -49,7 +52,6 @@
       <a-text value="Map Design" align="center" color="white" width="3" position="0 -3.0 0"></a-text>
       <a-text value="• Caitlyn Newago" align="center" color="white" width="2.5" position="0 -3.3 0"></a-text>
 
-      <!-- Video/audio credits -->
       <a-text value="Bridge Video" align="center" color="white" width="3" position="0 -4.0 0"></a-text>
       <a-text value="• Audio: Madeline Gupta" align="center" color="white" width="2.5" position="0 -4.3 0"></a-text>
 
@@ -97,7 +99,7 @@
 
     </a-entity>
 
-    <!-- Stylish VR-Compatible Back Button (lower-right corner) -->
+    <!-- Back Button -->
     <a-entity id="backButton"
               geometry="primitive: plane; width: 0.8; height: 0.3"
               material="color: white; opacity: 0.1"
@@ -107,15 +109,28 @@
               event-set__mouseenter="material.opacity: 0.6"
               event-set__mouseleave="material.opacity: 0.1">
     </a-entity>
-
   </a-scene>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       let backButton = document.querySelector("#backButton");
+      let oceanSound = document.querySelector("#oceanSound");
+
+      function startOceanSound() {
+        if (oceanSound && !oceanSound.components.sound.isPlaying) {
+          oceanSound.components.sound.playSound();
+        }
+      }
+
+      // Trigger sound on first click anywhere
+      window.addEventListener("click", startOceanSound, { once: true });
+
       if (backButton) {
         backButton.addEventListener("click", function () {
-          window.location.href = "index.html";
+          startOceanSound();
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 100);
         });
       }
     });
