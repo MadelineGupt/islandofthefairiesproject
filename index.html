@@ -1,100 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Island of the Fairies</title>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-        }
-        a-scene {
-            width: 100vw;
-            height: 100vh;
-        }
-        /* Footer Styles */
-        #footer {
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-            font-size: 14px;
-            color: white;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 5px 0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Island of the Fairies</title>
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    a-scene {
+      width: 100vw;
+      height: 100vh;
+    }
+    /* Footer Styles */
+    #footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 5px 0;
+    }
+  </style>
 </head>
 <body>
-    <a-scene>
-        <a-sky src="water-texture.jpg" color="#3d7d92" rotation="0 270 0"></a-sky>
-        
-        <!-- VR-Compatible Title with Magical Font -->
-        <a-entity position="0 4 -4" text="value: Island of the Fairies; align: center; width: 14; color: white; font: mozillavr;"></a-entity>
+  <a-scene>
+    <a-sky src="water-texture.jpg" color="#3d7d92" rotation="0 270 0"></a-sky>
 
-        <!-- VR-Compatible Buttons -->
-        <a-entity id="buttonContainer" position="0 1.5 -3">
-            <!-- Instructions Button -->
-            <a-entity id="instructionsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
-                      material="color: white; opacity: 0.8"
-                      position="-2 0 0"
-                      text="value: Instructions; align: center; color: black; width: 3"
-                      class="clickable">
-            </a-entity>
+    <!-- Ambient Ocean Sound -->
+    <a-sound src="url(ocean.mp3)" autoplay="true" loop="true" volume="0.5" position="0 2 0"></a-sound>
 
-            <!-- Enter Button -->
-            <a-entity id="enterButton" geometry="primitive: plane; width: 1.2; height: 0.4"
-                      material="color: white; opacity: 0.8"
-                      position="0 .2 0"
-                      text="value: Enter; align: center; color: black; width: 3"
-                      class="clickable">
-            </a-entity>
+    <!-- VR-Compatible Title with Magical Font -->
+    <a-entity position="0 4 -4" text="value: Island of the Fairies; align: center; width: 14; color: white; font: mozillavr;"></a-entity>
 
-            <!-- Credits Button -->
-            <a-entity id="creditsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
-                      material="color: white; opacity: 0.8"
-                      position="2 0 0"
-                      text="value: Credits; align: center; color: black; width: 3"
-                      class="clickable">
-            </a-entity>
-        </a-entity>
-        
-        <!-- Camera with Updated Cursor -->
-        <a-camera position="0 1.6 0">
-            <a-cursor color="white" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;" material="color: white; shader: flat;" position="0 0 -1"></a-cursor>
-        </a-camera>
-    </a-scene>
+    <!-- VR-Compatible Buttons -->
+    <a-entity id="buttonContainer" position="0 1.5 -3">
+      <!-- Instructions Button -->
+      <a-entity id="instructionsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
+                material="color: white; opacity: 0.8"
+                position="-2 0 0"
+                text="value: Instructions; align: center; color: black; width: 3"
+                class="clickable">
+      </a-entity>
 
-    <div id="footer">
-        &copy; 2025 Island of the Fairies. All rights reserved.
-    </div>
+      <!-- Enter Button -->
+      <a-entity id="enterButton" geometry="primitive: plane; width: 1.2; height: 0.4"
+                material="color: white; opacity: 0.8"
+                position="0 .2 0"
+                text="value: Enter; align: center; color: black; width: 3"
+                class="clickable">
+      </a-entity>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let instructionsButton = document.querySelector("#instructionsButton");
-            let enterButton = document.querySelector("#enterButton");
-            let creditsButton = document.querySelector("#creditsButton");
+      <!-- Credits Button -->
+      <a-entity id="creditsButton" geometry="primitive: plane; width: 1.2; height: 0.4"
+                material="color: white; opacity: 0.8"
+                position="2 0 0"
+                text="value: Credits; align: center; color: black; width: 3"
+                class="clickable">
+      </a-entity>
+    </a-entity>
 
-            if (!instructionsButton || !enterButton || !creditsButton) {
-                console.error("Buttons not found in DOM.");
-                return;
-            }
+    <!-- Camera with Updated Cursor -->
+    <a-camera position="0 1.6 0">
+      <a-cursor color="white" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;" material="color: white; shader: flat;" position="0 0 -1"></a-cursor>
+    </a-camera>
+  </a-scene>
 
-            instructionsButton.addEventListener("click", function(event) {
-                window.location.href = "instructions.html";
-            });
+  <div id="footer">
+    &copy; 2025 Island of the Fairies. All rights reserved.
+  </div>
 
-            enterButton.addEventListener("click", function(event) {
-                window.location.href = "map.html";
-            });
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let instructionsButton = document.querySelector("#instructionsButton");
+      let enterButton = document.querySelector("#enterButton");
+      let creditsButton = document.querySelector("#creditsButton");
 
-            creditsButton.addEventListener("click", function(event) {
-                window.location.href = "credits.html";
-            });
-        });
-    </script>
+      if (!instructionsButton || !enterButton || !creditsButton) {
+        console.error("Buttons not found in DOM.");
+        return;
+      }
+
+      instructionsButton.addEventListener("click", function (event) {
+        window.location.href = "instructions.html";
+      });
+
+      enterButton.addEventListener("click", function (event) {
+        window.location.href = "map.html";
+      });
+
+      creditsButton.addEventListener("click", function (event) {
+        window.location.href = "credits.html";
+      });
+    });
+  </script>
 </body>
 </html>
