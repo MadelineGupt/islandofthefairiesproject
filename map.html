@@ -35,6 +35,9 @@
 </head>
 <body>
   <a-scene>
+    <!-- Ambient Ocean Sound -->
+    <a-sound id="oceanSound" src="url(ocean.wav)" loop="true" volume="0.5" position="0 2 0"></a-sound>
+
     <a-entity environment="preset: contact; skyType: atmosphere; ground: none; dressing: none; horizonColor: #88ccee"></a-entity>
 
     <!-- Water -->
@@ -136,7 +139,17 @@
     document.addEventListener("DOMContentLoaded", function () {
       document.body.style.opacity = "1";
 
-      // Insert correct camera + cursor
+      const oceanSound = document.querySelector("#oceanSound");
+      function startOceanSound() {
+        if (oceanSound && !oceanSound.components.sound.isPlaying) {
+          oceanSound.components.sound.playSound();
+        }
+      }
+
+      // Start ocean sound on first user click
+      window.addEventListener("click", startOceanSound, { once: true });
+
+      // Set up camera
       const cameraWrapper = document.querySelector("#cameraWrapper");
 
       if (isMobile()) {
@@ -178,6 +191,7 @@
       }
 
       nextButton.addEventListener("click", function () {
+        startOceanSound();
         cameraRig.setAttribute("animation", {
           property: "position",
           to: "5 0 -4",
@@ -189,15 +203,18 @@
 
       for (let i = 1; i <= 15; i++) {
         document.querySelector(`#orb${i}`).addEventListener("click", function () {
+          startOceanSound();
           goToVideo(`https://storage.googleapis.com/islandofthefairies/video${i}.mov`);
         });
       }
 
       document.querySelector("#homeOverlayButton").addEventListener("click", function () {
+        startOceanSound();
         window.location.href = "index.html";
       });
 
       document.querySelector("#vrBackButton").addEventListener("click", function () {
+        startOceanSound();
         window.location.href = "index.html";
       });
     });
