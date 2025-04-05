@@ -32,11 +32,13 @@
   <a-scene>
     <a-sky src="water-texture.jpg" color="#3d7d92" rotation="0 270 0"></a-sky>
 
-    <!-- Ambient Ocean Sound -->
-    <a-sound src="url(ocean.wav)" autoplay="true" loop="true" volume="0.5" position="0 2 0"></a-sound>
+    <!-- Ambient Ocean Sound (no autoplay to comply with browser policies) -->
+    <a-sound id="oceanSound" src="url(ocean.wav)" loop="true" volume="0.5" position="0 2 0"></a-sound>
 
     <!-- VR-Compatible Title with Magical Font -->
-    <a-entity position="0 4 -4" text="value: Island of the Fairies; align: center; width: 14; color: white; font: mozillavr;"></a-entity>
+    <a-entity position="0 4 -4"
+              text="value: Island of the Fairies; align: center; width: 14; color: white; font: mozillavr;">
+    </a-entity>
 
     <!-- VR-Compatible Buttons -->
     <a-entity id="buttonContainer" position="0 1.5 -3">
@@ -67,7 +69,11 @@
 
     <!-- Camera with Updated Cursor -->
     <a-camera position="0 1.6 0">
-      <a-cursor color="white" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;" material="color: white; shader: flat;" position="0 0 -1"></a-cursor>
+      <a-cursor color="white"
+                geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;"
+                material="color: white; shader: flat;"
+                position="0 0 -1">
+      </a-cursor>
     </a-camera>
   </a-scene>
 
@@ -80,22 +86,29 @@
       let instructionsButton = document.querySelector("#instructionsButton");
       let enterButton = document.querySelector("#enterButton");
       let creditsButton = document.querySelector("#creditsButton");
+      let oceanSound = document.querySelector("#oceanSound");
 
-      if (!instructionsButton || !enterButton || !creditsButton) {
-        console.error("Buttons not found in DOM.");
-        return;
+      function startOceanSound() {
+        if (oceanSound && !oceanSound.components.sound.isPlaying) {
+          oceanSound.components.sound.playSound();
+        }
       }
 
-      instructionsButton.addEventListener("click", function (event) {
-        window.location.href = "instructions.html";
-      });
+      // Start sound on first click anywhere
+      window.addEventListener('click', startOceanSound, { once: true });
 
-      enterButton.addEventListener("click", function (event) {
-        window.location.href = "map.html";
-      });
-
-      creditsButton.addEventListener("click", function (event) {
-        window.location.href = "credits.html";
+      // Attach sound and navigation to all buttons
+      [instructionsButton, enterButton, creditsButton].forEach(button => {
+        if (button) {
+          button.addEventListener("click", function (event) {
+            startOceanSound();
+            setTimeout(() => {
+              if (button.id === "instructionsButton") window.location.href = "instructions.html";
+              if (button.id === "enterButton") window.location.href = "map.html";
+              if (button.id === "creditsButton") window.location.href = "credits.html";
+            }, 100); // slight delay to let sound trigger
+          });
+        }
       });
     });
   </script>
